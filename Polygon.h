@@ -1,3 +1,6 @@
+#ifndef POLYGON_H
+#define POLYGON_H
+
 #include <vector>
 #include <string>
 #include "Point.h"
@@ -10,9 +13,13 @@ protected:
   std::vector<Point> points;
   // Operations
 public:
-  Polygon (std::string polyName, std::vector<Point> polyPoints);
-  bool contains (Point point);
+  Polygon (std::string polyName, std::vector<Point> polyPoints = std::vector<Point>());
+  virtual bool contain (Point point) const;
   void move (Point vector);
-  std::string describe ();
+  std::string describe () const;
+
+private:
+    bool isBetween(int x, int firstBound, int secondBound) const;
 };
 
+#endif

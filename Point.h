@@ -1,12 +1,24 @@
-/// class point - 
+#ifndef POINT_H
+#define POINT_H
+
+/// class point -
 class Point {
-  // Attributes
+    // Attributes
 private:
-  int x;
-  int y;
-  // Operations
+    int x;
+    int y;
+    // Operations
+
 public:
-  Point operator+ (Point otherPoint);
-  Point operator- (Point otherPoint);
+    Point(int xCoordinate, int yCoordinate);
+
+    Point operator+(Point otherPoint);
+    Point operator+=(Point otherPoint);
+    Point operator-(Point otherPoint);
+    Point operator-=(Point otherPoint);
+
+    int getX() const;
+    int getY() const;
 };
 
+#endif

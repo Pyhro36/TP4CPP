@@ -1,16 +1,23 @@
+#ifndef SHAPE_H
+#define SHAPE_H
+
 #include <string>
 #include "Point.h"
 
 /// class Shape -
 class Shape {
-  // Attributes
+    // Attributes
 protected:
-  std::string name;
-  // Operations
+    std::string name;
+    // Operations
 public:
-  Shape (std::string shapeName);
-  virtual bool contain (Point point) = 0;
-  virtual void move (Point vector) = 0;
-  virtual std::string describe () = 0;
+    Shape(std::string shapeName);
+
+    virtual bool contain(Point point) const = 0;
+    virtual void move(Point vector) = 0;
+    virtual std::string describe() const = 0;
+    virtual void appendToName(std::string newNameEnding);
+    std::string getName();
 };
 
+#endif

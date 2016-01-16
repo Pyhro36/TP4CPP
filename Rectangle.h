@@ -1,11 +1,19 @@
+#ifndef RECTANGLE_H
+#define RECTANGLE_H
+
 #include "Polygon.h"
+#include "Point.h"
 
 /// class Rectangle - 
 class Rectangle : public Polygon {
   // Operations
 public:
-  bool contains (Point point);
+  virtual bool contain (Point point) const;
   Rectangle (std::string RectName, Point firstCorner, Point secondCorner);
-  std::string describe ();
+  std::string describe () const;
+
+private:
+    int xMax, xMin, yMax, yMin;
 };
 
+#endif

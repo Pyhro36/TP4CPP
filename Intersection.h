@@ -1,3 +1,6 @@
+#ifndef INTERSECTION_H
+#define INTERSECTION_H
+
 #include <string>
 #include <vector>
 #include "Point.h"
@@ -6,10 +9,12 @@
 
 /// class Intersection - 
 class Intersection : public MultiPoly {
-  // Operations
+    // Operations
 public:
-  Intersection (std::string interName, std::vector<Shape> shapes);
-  bool contain (Point point);
-  std::string describe ();
+    Intersection(std::string interName, std::vector<std::shared_ptr<Shape> > shapes);
+
+    bool contain(Point point) const;
+    std::string describe() const;
 };
 
+#endif
