@@ -35,14 +35,7 @@ Rectangle::Rectangle(std::string RectName, Point firstCorner, Point secondCorner
 
 bool Rectangle::contain(Point point) const
 {
-    if( point.getX()<=xMax && point.getX()>=xMin && point.getY()<=yMax && point.getY()>=yMin)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    return point.getX()<=xMax && point.getX()>=xMin && point.getY()<=yMax && point.getY()>=yMin;
 }
 
 std::string Rectangle::describe() const

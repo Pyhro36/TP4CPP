@@ -16,7 +16,7 @@ public:
   Polygon (std::string polyName, std::vector<Point> polyPoints = std::vector<Point>());
   virtual bool contain (Point point) const;
   void move (Point vector);
-  std::string describe () const;
+  virtual std::string describe () const;
 
 private:
     bool isBetween(int x, int firstBound, int secondBound) const;
