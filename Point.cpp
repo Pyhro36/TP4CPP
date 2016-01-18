@@ -13,24 +13,28 @@ int Point::getY() const {
     return y;
 }
 
-Point Point::operator+(Point otherPoint)
+Point & Point::operator+(const Point & otherPoint) const
 {
     Point ret(x+otherPoint.x,y+otherPoint.y);
+    return ret;
 }
 
-Point Point::operator+=(Point otherPoint)
+Point & Point::operator+=(const Point & otherPoint)
 {
     x += otherPoint.x;
     y += otherPoint.y;
+    return *this;
 }
 
-Point Point::operator-(Point otherPoint)
+Point & Point::operator-(const Point & otherPoint) const
 {
     Point ret(x-otherPoint.x,y-otherPoint.y);
+    return ret;
 }
 
-Point Point::operator-=(Point otherPoint)
+Point & Point::operator-=(const Point & otherPoint)
 {
     x -= otherPoint.x;
     y -= otherPoint.y;
+    return *this;
 }

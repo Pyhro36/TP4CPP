@@ -16,8 +16,10 @@ public:
     virtual bool contain(Point point) const = 0;
     virtual void move(Point vector) = 0;
     virtual std::string describe() const = 0;
-    virtual void appendToName(std::string newNameEnding);
     std::string getName();
+
+protected:
+    virtual void appendToName(std::string newNameEnding);
 };
 
 #endif
