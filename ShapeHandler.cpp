@@ -155,7 +155,7 @@ int ShapeHandler::removeShape(const std::string &shapeName, bool saveInUndoList)
 
 int ShapeHandler::loadFile(const std::string & fileName)
 {
-    std::ifstream file(fileName, ios::in);
+    std::ifstream file(fileName, std::ios::in);
 
 	if(file)
 	{
@@ -293,12 +293,12 @@ int ShapeHandler::execute(const std::string &command, bool saveInUndoList)
     }
 }
 
-std::stringstream ShapeHandler::list()
+std::string ShapeHandler::list()
 {
 	std::stringstream ret;
 
 	for(std::pair<std::string, Shape *> s:nameShapeMap)
-	{s
+	{
 		ret << s.second->describe();
 	}
 
@@ -309,5 +309,5 @@ std::stringstream ShapeHandler::list()
 		ret << s.first << " ";
 	}
 
-	return ret;
+	return ret.str();
 }

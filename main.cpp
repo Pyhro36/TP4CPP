@@ -7,16 +7,16 @@ using namespace std;
 
 int main() {
     
-    cout << "Shape handler 1.0 :"
+    cout << "Shape handler 1.0 :" << endl;
     
-    ShapeHandler shapeHandler();
+    ShapeHandler shapeHandler;
     int code;
     
     
     string cmd;
     cin >> cmd;
     
-    while(!cmd.compare(EXIT))
+    while(cmd.compare("EXIT"))
     {
     	code = shapeHandler.execute(cmd, true);
     	
