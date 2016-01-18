@@ -12,11 +12,12 @@ class MultiPoly : public Shape
 {
     // Attributes
 protected:
-    std::vector< std::shared_ptr<Shape> > shapes;
+    std::vector<Shape*> shapes;
     // Operations
 public:
-    MultiPoly(const std::string & PolysName,const std::vector< std::shared_ptr<Shape>> & shapesList);
+    MultiPoly(const std::string & PolysName,const std::vector<Shape*> & shapesList);
     MultiPoly(const MultiPoly & multypolyToClone);
+    virtual ~MultiPoly();
 
     virtual bool contain(const Point & point) const = 0;
     void move(const Point & vector);

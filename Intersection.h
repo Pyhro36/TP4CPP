@@ -15,6 +15,7 @@ public:
 
     bool contain(const Point & point) const;
     std::string describe() const;
+    Shape* clone() const;
 };
 
 #endif

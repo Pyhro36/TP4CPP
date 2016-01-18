@@ -18,6 +18,7 @@ public:
     virtual std::string describe() const = 0;
     std::string getName() const;
     virtual void appendToName(const std::string & newNameEnding);
+    virtual Shape* clone() const = 0;
 };
 
 #endif

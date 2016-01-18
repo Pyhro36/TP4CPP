@@ -10,6 +10,7 @@ public:
     Segment(const std::string & name, const Point & firstPoint, const Point & secondPoint);
     virtual bool contain(const Point & point) const;
     std::string describe() const;
+    Shape* clone() const;
 
 private:
     bool isBetween(int x,int firstBound,int secondBound) const;

@@ -49,3 +49,8 @@ std::string Segment::describe() const
     ret << points.at(1).getX() << " " << points.at(1).getY() << std::endl;
     return ret.str();
 }
+
+Shape* Segment::clone() const
+{
+    return new Segment(*this);
+}

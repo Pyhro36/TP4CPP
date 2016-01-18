@@ -41,3 +41,8 @@ std::string Union::describe() const
     }
     ret << std::endl;
 }
+
+Shape* Union::clone() const
+{
+    return new Union(*this);
+}

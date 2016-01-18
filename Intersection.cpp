@@ -44,3 +44,8 @@ std::string Intersection::describe() const
 
     ret << std::endl;
 }
+
+Shape* Intersection::clone() const
+{
+    return new Intersection(*this);
+}

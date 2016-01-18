@@ -45,3 +45,8 @@ std::string Rectangle::describe() const
     ret << points.at(2).getX() << " " << points.at(2).getY() << std::endl;
     return ret.str();
 }
+
+Shape* Rectangle::clone() const
+{
+    return new Rectangle(*this);
+}

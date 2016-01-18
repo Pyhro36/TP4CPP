@@ -80,3 +80,8 @@ std::string Polygon::describe() const
     ret << std::endl;
     return ret.str();
 }
+
+Shape* Polygon::clone() const
+{
+    return new Polygon(*this);
+}
