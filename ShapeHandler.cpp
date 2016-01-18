@@ -68,6 +68,16 @@ int ShapeHandler::addConvexPolygon(const std::string &name, const std::vector<Po
     return addShape(polygon,saveInUndoList);
 }
 
+int ShapeHandler::addIntersection(const std::string &name, const std::vector<std::string> &shapesToIntersect,
+                                  bool saveInUndoList)
+{
+    std::vector<Shape*> shapeList;
+    shapeList.reserve(shapesToIntersect.size());
+    for(const std::string & name:shapesToIntersect)
+    {
+
+    }
+}
 
 int ShapeHandler::removeShape(const std::string &shapeName, bool saveInUndoList)
 {
