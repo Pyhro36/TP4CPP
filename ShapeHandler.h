@@ -47,7 +47,8 @@ private:
     int undo();
     int redo();
     
-    std::stringstream list();
+    std::string list();
+    std::string deleteList();
 
 };
 
