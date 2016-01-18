@@ -2,6 +2,8 @@
 #include <fstream>
 #include <iostream>
 #include <sstream>
+#include <string>
+#include <sstream>
 
 #include "ShapeHandler.h"
 #include "ErrorCode.h"
@@ -144,18 +146,33 @@ int ShapeHandler::removeShape(const std::string &shapeName, bool saveInUndoList)
 
 	if(file)
 	{
-		std::stringstream
-		string content;
-
+		file << list();
 		file.close();
 		return 0;
 	}
 		return UNKNOWN_FILE_ERROR;
 }*/
 
-int ShapeHandler::loadFile(const std::string & fileName, bool saveUndoList)
+int ShapeHandler::loadFile(const std::string & fileName)
 {
+    std::ifstream file(fileName, ios::in);
 
+	if(file)
+	{
+        std::string ret = "";
+        std::string line;
+		getline(file,line);
+		while(!line.compare("|"))
+		{
+			ret.append(line);
+			getline(file,line);
+		}
+		getline(file, line);
+		undoCommandStack.push(line);
+		execute(ret, true);
+		undoCommandStack.pop();
+	}
+	return FILE_DOES_NOT_EXIST;
 }
 
 int ShapeHandler::undo()
@@ -274,6 +291,23 @@ int ShapeHandler::execute(const std::string &command, bool saveInUndoList)
 
         }
     }
+}
 
+std::stringstream ShapeHandler::list()
+{
+	std::stringstream ret;
 
+	for(std::pair<std::string, Shape *> s:nameShapeMap)
+	{s
+		ret << s.second->describe();
+	}
+
+	ret << std::endl << "|" << std::endl << "DELETE ";
+
+	for(std::pair<std::string, Shape *> s:nameShapeMap)
+	{
+		ret << s.first << " ";
+	}
+
+	return ret;
 }
