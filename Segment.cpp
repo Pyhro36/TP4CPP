@@ -45,7 +45,7 @@ bool Segment::isBetween(int x, int firstBound, int secondBound) const
 std::string Segment::describe() const
 {
     std::stringstream ret;
-    ret << "S " << name << " " << points.at(0).getX() << " " << points.at(0).getY();
+    ret << "S " << name << " " << points.at(0).getX() << " " << points.at(0).getY()<< " ";
     ret << points.at(1).getX() << " " << points.at(1).getY() << std::endl;
     return ret.str();
 }

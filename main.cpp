@@ -14,11 +14,11 @@ int main() {
     
     
     string cmd;
-    cin >> cmd;
+	getline(cin,cmd);
     
     while(cmd.compare("EXIT"))
     {
-    	code = shapeHandler.execute(cmd, true);
+    	code = shapeHandler.userExecute(cmd);
     	
     	switch (code) 
     	{
@@ -50,7 +50,7 @@ int main() {
     			break;
     	} 
     	
-    	cin >> cmd;
+    	getline(cin,cmd);
     }
     return 0;
 }

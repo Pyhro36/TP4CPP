@@ -11,7 +11,7 @@ bool Polygon::contain(const Point & point) const
     bool overBounded=false, underBounded=false;
     Point firstSegmentPoint = points.at(points.size()-1);
     Point secondSegmentPoint = points.at(0);
-    for(int i=0 ; i<points.size() ; i++)
+    for(unsigned i=0 ; i<points.size() ; i++)
     {
         if( point.getX()==firstSegmentPoint.getX() && firstSegmentPoint.getX()==secondSegmentPoint.getX())
         {

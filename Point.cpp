@@ -13,7 +13,7 @@ int Point::getY() const {
     return y;
 }
 
-Point & Point::operator+(const Point & otherPoint) const
+Point Point::operator+(const Point & otherPoint) const
 {
     Point ret(x+otherPoint.x,y+otherPoint.y);
     return ret;
@@ -26,7 +26,7 @@ Point & Point::operator+=(const Point & otherPoint)
     return *this;
 }
 
-Point & Point::operator-(const Point & otherPoint) const
+Point Point::operator-(const Point & otherPoint) const
 {
     Point ret(x-otherPoint.x,y-otherPoint.y);
     return ret;

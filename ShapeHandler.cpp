@@ -208,7 +208,7 @@ int ShapeHandler::redo()
 int ShapeHandler::clear()
 {
     int returnCode;
-    for(std::pair<std::string,Shape*> & element:nameShapeMap)
+    for(const std::pair<std::string,Shape*> & element:nameShapeMap)
     {
         returnCode = removeShape(element.second->getName(),true);
         if(returnCode!=0)
@@ -414,7 +414,7 @@ int ShapeHandler::execute(const std::string &command, bool saveInUndoList)
 int ShapeHandler::userExecute(const std::string &command)
 {
     //clear redo stack:
-    for(int i=0 ; i<redoCommandStack.size() ; i++)
+    for(unsigned i=0 ; i<redoCommandStack.size() ; i++)
     {
         redoCommandStack.pop();
     }
@@ -422,7 +422,12 @@ int ShapeHandler::userExecute(const std::string &command)
     undoCommandStack.push("");
 
     //execute command:
-    return execute(command);
+    int returnCode = execute(command);
+    if(returnCode == 0 && command.at(0)!='L' && command.at(0)!='H' ) //L and H not to show 'OK' when HIT or LIST command
+    {
+        std::cout << "OK" << std::endl;
+    }
+    return returnCode;
 }
 
 std::string ShapeHandler::list()
