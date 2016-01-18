@@ -12,6 +12,7 @@ protected:
     // Operations
 public:
     Shape(const std::string & shapeName);
+    virtual ~Shape();
 
     virtual bool contain(const Point & point) const = 0;
     virtual void move(const Point & vector) = 0;

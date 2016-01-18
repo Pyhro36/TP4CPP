@@ -12,9 +12,9 @@ private:
 public:
     Point(int xCoordinate, int yCoordinate);
 
-    Point & operator+(const Point &  otherPoint) const;
+    Point operator+(const Point &  otherPoint) const;
     Point & operator+=(const Point &  otherPoint);
-    Point & operator-(const Point &  otherPoint) const;
+    Point operator-(const Point &  otherPoint) const;
     Point & operator-=(const Point &  otherPoint);
 
     int getX() const;

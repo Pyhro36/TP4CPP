@@ -41,7 +41,7 @@ bool Rectangle::contain(const Point & point) const
 std::string Rectangle::describe() const
 {
     std::stringstream ret;
-    ret << "R " << name << " " << points.at(0).getX() << " " << points.at(0).getY();
+    ret << "R " << name << " " << points.at(0).getX() << " " << points.at(0).getY()<< " ";
     ret << points.at(2).getX() << " " << points.at(2).getY() << std::endl;
     return ret.str();
 }
