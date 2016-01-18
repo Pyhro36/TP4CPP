@@ -44,6 +44,7 @@ private:
     int redo();
     
     std::string list();
+    std::string deleteList();
 
 };
 

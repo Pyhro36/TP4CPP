@@ -140,18 +140,19 @@ int ShapeHandler::removeShape(const std::string &shapeName, bool saveInUndoList)
     }
 }
 
-/*int ShapeHandler::saveFile(const std::string & fileName)
+int ShapeHandler::saveFile(const std::string & fileName)
 {
 	std::ofstream file(fileName, std::ios::out | std::ios::trunc);
 
 	if(file)
 	{
 		file << list();
+		file << deleteList();
 		file.close();
 		return 0;
 	}
 		return UNKNOWN_FILE_ERROR;
-}*/
+}
 
 int ShapeHandler::loadFile(const std::string & fileName)
 {
@@ -301,7 +302,13 @@ std::string ShapeHandler::list()
 	{
 		ret << s.second->describe();
 	}
+	
+	return ret.str();
+}
 
+std::string ShapeHandler::deleteList()
+{
+	std::stringstream ret;
 	ret << std::endl << "|" << std::endl << "DELETE ";
 
 	for(std::pair<std::string, Shape *> s:nameShapeMap)
