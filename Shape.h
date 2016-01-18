@@ -16,7 +16,7 @@ public:
     virtual bool contain(const Point & point) const = 0;
     virtual void move(const Point & vector) = 0;
     virtual std::string describe() const = 0;
-    std::string getName();
+    std::string getName() const;
     virtual void appendToName(const std::string & newNameEnding);
 };
 

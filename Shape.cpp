@@ -10,7 +10,7 @@ void Shape::appendToName(const std::string & newNameEnding)
     name.append(newNameEnding);
 }
 
-std::string Shape::getName()
+std::string Shape::getName() const
 {
     return name;
 }

@@ -1,0 +1,8 @@
+#ifndef TP_CPP3_ERRORCODE_H
+#define TP_CPP3_ERRORCODE_H
+
+const int NAME_ALREADY_USED = 100;
+const int NAME_NOT_USED = 101;
+const int POLYGON_IS_NOT_CONVEX = 110;
+
+#endif //TP_CPP3_ERRORCODE_H

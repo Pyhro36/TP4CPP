@@ -23,17 +23,17 @@ public:
     ShapeHandler();
     virtual ~ShapeHandler();
 
-    void execute(const std::string & command);
+    int execute(const std::string & command, bool saveInUndoList = true);
 
 private:
-    int addRect(const std::string & name,const Point & firstCorner,const Point & secondCorner);
-    int addSegment(const std::string & name,const Point & firstPoint,const Point & secondPoint);
-    int addConvexPolygon(const std::string & name,const std::vector<Point> & polygonCorners);
-    int addUnion(const std::string & name,const std::vector<std::string> & shapesToUnion);
-    int addIntersection(const std::string & name,const std::vector<std::string> & shapesToIntersect);
-    void addShape(Shape * shapeToAdd);
+    int addRect(const std::string & name,const Point & firstCorner,const Point & secondCorner, bool saveInUndoList = true);
+    int addSegment(const std::string & name,const Point & firstPoint,const Point & secondPoint, bool saveInUndoList = true);
+    int addConvexPolygon(const std::string & name,const std::vector<Point> & polygonCorners, bool saveInUndoList = true);
+    int addUnion(const std::string & name,const std::vector<std::string> & shapesToUnion, bool saveInUndoList = true);
+    int addIntersection(const std::string & name,const std::vector<std::string> & shapesToIntersect, bool saveInUndoList = true);
 
-    int removeShape(const std::string & shapeName);
+    int addShape(Shape * shapeToAdd, bool saveInUndoList = true);
+    int removeShape(const std::string & shapeName, bool saveInUndoList = true);
 
     int undo();
     int redo();
