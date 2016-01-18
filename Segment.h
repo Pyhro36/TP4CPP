@@ -7,8 +7,8 @@
 class Segment : public Polygon {
     // Operations
 public:
-    Segment(std::string name, Point firstPoint, Point secondPoint);
-    virtual bool contain(Point point) const;
+    Segment(const std::string & name, const Point & firstPoint, const Point & secondPoint);
+    virtual bool contain(const Point & point) const;
     std::string describe() const;
 
 private:

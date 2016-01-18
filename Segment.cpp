@@ -1,14 +1,14 @@
 #include "Segment.h"
 #include <sstream>
 
-Segment::Segment(std::string name, Point firstPoint, Point secondPoint): Polygon(name)
+Segment::Segment(const std::string & name,const Point & firstPoint,const Point & secondPoint): Polygon(name)
 {
     points.reserve(2); // set the reserved size of the vector to 2
     points.push_back(firstPoint);
     points.push_back(secondPoint);
 }
 
-bool Segment::contain(Point point) const
+bool Segment::contain(const Point & point) const
 {
     if( point.getX()==points.at(0).getX() && points.at(0).getX()==points.at(1).getX())
     {

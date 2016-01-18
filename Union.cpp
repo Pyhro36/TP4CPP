@@ -1,12 +1,12 @@
 #include <sstream>
 #include "Union.h"
 
-Union::Union(std::string UnionName, std::vector< std::shared_ptr<Shape> > shapes): MultiPoly(UnionName, shapes)
+Union::Union(const std::string & UnionName,const std::vector<std::shared_ptr<Shape>> & shapes): MultiPoly(UnionName, shapes)
 {
 
 }
 
-bool Union::contain(Point point) const
+bool Union::contain(const Point & point) const
 {
     for(const std::shared_ptr<Shape> & shape : shapes)
     {

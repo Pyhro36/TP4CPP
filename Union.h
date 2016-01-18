@@ -8,8 +8,8 @@
 class Union : public MultiPoly {
   // Operations
 public:
-  Union (std::string UnionName,std::vector< std::shared_ptr<Shape> > shapes);
-  bool contain (Point point) const;
+  Union (const std::string & UnionName,const std::vector<std::shared_ptr<Shape>> & shapes);
+  bool contain (const Point & point) const;
   std::string describe () const;
 };
 

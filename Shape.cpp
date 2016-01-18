@@ -1,11 +1,11 @@
 #include "Shape.h"
 
-Shape::Shape(std::string shapeName): name(shapeName)
+Shape::Shape(const std::string & shapeName): name(shapeName)
 {
 
 }
 
-void Shape::appendToName(std::string newNameEnding)
+void Shape::appendToName(const std::string & newNameEnding)
 {
     name.append(newNameEnding);
 }

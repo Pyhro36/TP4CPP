@@ -11,15 +11,13 @@ protected:
     std::string name;
     // Operations
 public:
-    Shape(std::string shapeName);
+    Shape(const std::string & shapeName);
 
-    virtual bool contain(Point point) const = 0;
-    virtual void move(Point vector) = 0;
+    virtual bool contain(const Point & point) const = 0;
+    virtual void move(const Point & vector) = 0;
     virtual std::string describe() const = 0;
     std::string getName();
-
-protected:
-    virtual void appendToName(std::string newNameEnding);
+    virtual void appendToName(const std::string & newNameEnding);
 };
 
 #endif

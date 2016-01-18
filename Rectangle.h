@@ -6,11 +6,12 @@
 
 /// class Rectangle - 
 class Rectangle : public Polygon {
-  // Operations
+    // Operations
 public:
-  virtual bool contain (Point point) const;
-  Rectangle (std::string RectName, Point firstCorner, Point secondCorner);
-  std::string describe () const;
+    Rectangle(const std::string &RectName, const Point &firstCorner, const Point &secondCorner);
+
+    virtual bool contain(const Point &point) const;
+    std::string describe() const;
 
 private:
     int xMax, xMin, yMax, yMin;

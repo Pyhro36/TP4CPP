@@ -1,12 +1,12 @@
 #include <sstream>
 #include "Polygon.h"
 
-Polygon::Polygon(std::string polyName, std::vector<Point> polyPoints) : Shape(polyName), points(polyPoints)
+Polygon::Polygon(const std::string & polyName,const std::vector<Point> & polyPoints) : Shape(polyName), points(polyPoints)
 {
 
 }
 
-bool Polygon::contain(Point point) const
+bool Polygon::contain(const Point & point) const
 {
     bool overBounded=false, underBounded=false;
     Point firstSegmentPoint = points.at(points.size()-1);
@@ -55,7 +55,7 @@ bool Polygon::contain(Point point) const
     return false;
 }
 
-void Polygon::move(Point vector)
+void Polygon::move(const Point & vector)
 {
     for(Point & point:points)
     {

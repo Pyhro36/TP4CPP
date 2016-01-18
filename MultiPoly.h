@@ -15,13 +15,11 @@ protected:
     std::vector< std::shared_ptr<Shape> > shapes;
     // Operations
 public:
-    MultiPoly(std::string PolysName, std::vector< std::shared_ptr<Shape> > shapesList);
-    virtual bool contain(Point point) const = 0;
-    void move(Point vector);
+    MultiPoly(const std::string & PolysName,const std::vector< std::shared_ptr<Shape>> & shapesList);
+    virtual bool contain(const Point & point) const = 0;
+    void move(const Point & vector);
     virtual std::string describe() const = 0;
-
-protected:
-    void appendToName(std::string newNameEnding);
+    void appendToName(const std::string & newNameEnding);
 };
 
 #endif

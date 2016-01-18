@@ -1,6 +1,6 @@
 #include "MultiPoly.h"
 
-MultiPoly::MultiPoly(std::string PolysName, std::vector< std::shared_ptr<Shape> > shapesList): Shape(PolysName), shapes(shapesList)
+MultiPoly::MultiPoly(const std::string & PolysName,const std::vector<std::shared_ptr<Shape>> & shapesList): Shape(PolysName), shapes(shapesList)
 {
     //rename all the entities in shapesList:
     std::string toAdd = "-";
@@ -11,7 +11,7 @@ MultiPoly::MultiPoly(std::string PolysName, std::vector< std::shared_ptr<Shape> 
     }
 }
 
-void MultiPoly::move(Point vector)
+void MultiPoly::move(const Point & vector)
 {
     for(std::shared_ptr<Shape> & shape : shapes)
     {
@@ -19,7 +19,7 @@ void MultiPoly::move(Point vector)
     }
 }
 
-void MultiPoly::appendToName(std::string newNameEnding)
+void MultiPoly::appendToName(const std::string & newNameEnding)
 {
     Shape::appendToName(newNameEnding);
     for(std::shared_ptr<Shape> & s:shapes)

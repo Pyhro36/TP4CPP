@@ -1,7 +1,7 @@
 #include <sstream>
 #include "Rectangle.h"
 
-Rectangle::Rectangle(std::string RectName, Point firstCorner, Point secondCorner): Polygon(RectName)
+Rectangle::Rectangle(const std::string & RectName, const Point & firstCorner, const Point & secondCorner): Polygon(RectName)
 {
     points.reserve(4); // set the reserved size of the vector to 4
     points.push_back(firstCorner);
@@ -33,7 +33,7 @@ Rectangle::Rectangle(std::string RectName, Point firstCorner, Point secondCorner
     }
 }
 
-bool Rectangle::contain(Point point) const
+bool Rectangle::contain(const Point & point) const
 {
     return point.getX()<=xMax && point.getX()>=xMin && point.getY()<=yMax && point.getY()>=yMin;
 }

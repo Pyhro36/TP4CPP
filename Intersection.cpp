@@ -1,12 +1,12 @@
 #include <sstream>
 #include "Intersection.h"
 
-Intersection::Intersection(std::string interName, std::vector< std::shared_ptr<Shape> > shapes): MultiPoly(interName,shapes)
+Intersection::Intersection(const std::string & interName,const std::vector<std::shared_ptr<Shape>> & shapes): MultiPoly(interName,shapes)
 {
 
 }
 
-bool Intersection::contain(Point point) const
+bool Intersection::contain(const Point & point) const
 {
     for(const std::shared_ptr<Shape> & shape : shapes)
     {

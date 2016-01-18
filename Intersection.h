@@ -11,9 +11,9 @@
 class Intersection : public MultiPoly {
     // Operations
 public:
-    Intersection(std::string interName, std::vector<std::shared_ptr<Shape> > shapes);
+    Intersection(const std::string & interName,const std::vector<std::shared_ptr<Shape> > & shapes);
 
-    bool contain(Point point) const;
+    bool contain(const Point & point) const;
     std::string describe() const;
 };
 
