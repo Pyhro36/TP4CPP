@@ -35,6 +35,7 @@ private:
 
     int removeShape(const std::string & shapeName);
 
+    int clear();
     int undo();
     int redo();
 };
