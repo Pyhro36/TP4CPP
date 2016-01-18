@@ -4,6 +4,7 @@
 #include <string>
 #include <map>
 #include <stack>
+#include <sstream>
 
 #include "Point.h"
 #include "Shape.h"
@@ -41,7 +42,8 @@ private:
     int clear();
     int undo();
     int redo();
-
+    
+    std::stringstream list();
 
 };
 
