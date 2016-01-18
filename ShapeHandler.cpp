@@ -1,6 +1,7 @@
 
 #include <fstream>
 #include <iostream>
+#include <sstream>
 
 #include "ShapeHandler.h"
 #include "ErrorCode.h"
@@ -29,11 +30,13 @@ int ShapeHandler::addShape(Shape *shapeToAdd, bool saveInUndoList)
         //put undo command on stack:
         if(saveInUndoList)
         {
-            undoCommandStack.push(undo);
+            //undoCommandStack.push(undo);
+            undoCommandStack.top().append(undo);
         }
         else
         {
-            redoCommandStack.push(undo);
+            //redoCommandStack.push(undo);
+            redoCommandStack.top().append(undo);
         }
 
         nameShapeMap.insert(std::pair<std::string,Shape*>(shapeToAdd->getName(),shapeToAdd));
@@ -73,10 +76,41 @@ int ShapeHandler::addIntersection(const std::string &name, const std::vector<std
 {
     std::vector<Shape*> shapeList;
     shapeList.reserve(shapesToIntersect.size());
-    for(const std::string & name:shapesToIntersect)
+    for(const std::string &shapeName:shapesToIntersect)
     {
-
+        std::map<std::string,Shape*>::iterator element = nameShapeMap.find(shapeName);
+        if(element!=nameShapeMap.end())
+        {
+            shapeList.push_back(element->second->clone());
+        }
+        else
+        {
+            return NAME_NOT_USED;
+        }
     }
+    Intersection * intersection = new Intersection(name,shapeList);
+    return addShape(intersection,saveInUndoList);
+}
+
+int ShapeHandler::addUnion(const std::string &name, const std::vector<std::string> &shapesToUnion,
+                           bool saveInUndoList)
+{
+    std::vector<Shape*> shapeList;
+    shapeList.reserve(shapesToUnion.size());
+    for(const std::string &shapeName:shapesToUnion)
+    {
+        std::map<std::string,Shape*>::iterator element = nameShapeMap.find(shapeName);
+        if(element!=nameShapeMap.end())
+        {
+            shapeList.push_back(element->second->clone());
+        }
+        else
+        {
+            return NAME_NOT_USED;
+        }
+    }
+    Union * anUnion = new Union(name,shapeList);
+    return addShape(anUnion,saveInUndoList);
 }
 
 int ShapeHandler::removeShape(const std::string &shapeName, bool saveInUndoList)
@@ -86,11 +120,13 @@ int ShapeHandler::removeShape(const std::string &shapeName, bool saveInUndoList)
     {
         if(saveInUndoList)
         {//add the undo command to list:
-            undoCommandStack.push(element->second->describe());
+            undoCommandStack.top().append(element->second->describe());
+            //undoCommandStack.push(element->second->describe());
         }
         else
         {//add the undo command to redo list:
-            redoCommandStack.push(element->second->describe());
+            redoCommandStack.top().append(element->second->describe());
+            //redoCommandStack.push(element->second->describe());
         }
         delete element->second; //delete object
         nameShapeMap.erase(element); //delete object from map
@@ -102,7 +138,7 @@ int ShapeHandler::removeShape(const std::string &shapeName, bool saveInUndoList)
     }
 }
 
-int ShapeHandler::saveFile(const std::string & fileName)
+/*int ShapeHandler::saveFile(const std::string & fileName)
 {
 	std::ofstream file(fileName, std::ios::out | std::ios::trunc);
 
@@ -115,7 +151,7 @@ int ShapeHandler::saveFile(const std::string & fileName)
 		return 0;
 	}
 		return UNKNOWN_FILE_ERROR;
-}
+}*/
 
 int ShapeHandler::loadFile(const std::string & fileName, bool saveUndoList)
 {
@@ -128,8 +164,7 @@ int ShapeHandler::undo()
     {
         std::string command = undoCommandStack.top();
         if( execute(command,false)==0 )
-        {
-            //if every things go right remove command from undo list
+        {//if every things go right remove command from undo list
             undoCommandStack.pop();
         }
     }
@@ -141,9 +176,104 @@ int ShapeHandler::redo()
     {
         std::string command = redoCommandStack.top();
         if( execute(command,true)==0 )
-        {
-            //if every things go right remove command from undo list
+        {//if every things go right remove command from redo list
             redoCommandStack.pop();
         }
     }
+}
+
+int ShapeHandler::execute(const std::string &command, bool saveInUndoList)
+{
+    std::stringstream commandStream;
+    commandStream.str(command);
+    std::string line;
+    std::stringstream lineStream;
+    std::string commandId;
+    //read command line by line
+    while(std::getline(commandStream,line))
+    {
+        lineStream.str(line);
+        lineStream >> commandId;
+        if(commandId.compare("S")==0)
+        {
+            std::string name;
+            int x1,x2,y1,y2;
+            lineStream >> name >> x1 >> y1 >> x2 >> y2;
+            addSegment(name,Point(x1,y1),Point(x2,y2));
+        }
+        else if(commandId.compare("R")==0)
+        {
+            std::string name;
+            int x1,x2,y1,y2;
+            lineStream >> name >> x1 >> y1 >> x2 >> y2;
+            addRect(name,Point(x1,y1),Point(x2,y2));
+        }
+        else if(commandId.compare("PC")==0)
+        {
+            std::string name;
+            std::vector<Point> points;
+            int c[2];
+            for(int i = 0; lineStream ; i=1-i) {
+                lineStream >> c[i];
+                if(i==1)
+                {
+                    points.push_back(Point(c[0],c[1]));
+                }
+            }
+        }
+        else if(commandId.compare("OR")==0)
+        {
+
+        }
+        else if(commandId.compare("OI")==0)
+        {
+
+        }
+        else if(commandId.compare("HIT")==0)
+        {
+
+        }
+        else if(commandId.compare("DELETE")==0)
+        {
+
+        }
+        else if(commandId.compare("MOVE")==0)
+        {
+
+        }
+        else if(commandId.compare("LIST")==0)
+        {
+
+        }
+        else if(commandId.compare("UNDO")==0)
+        {
+
+        }
+        else if(commandId.compare("REDO")==0)
+        {
+
+        }
+        else if(commandId.compare("LOAD")==0)
+        {
+
+        }
+        else if(commandId.compare("SAVE")==0)
+        {
+
+        }
+        else if(commandId.compare("CLEAR")==0)
+        {
+
+        }
+        else if(commandId.compare("EXIT")==0)
+        {
+
+        }
+        else
+        {
+
+        }
+    }
+
+
 }

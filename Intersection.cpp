@@ -1,7 +1,7 @@
 #include <sstream>
 #include "Intersection.h"
 
-Intersection::Intersection(const std::string & interName,const std::vector<std::shared_ptr<Shape>> & shapes): MultiPoly(interName,shapes)
+Intersection::Intersection(const std::string & interName,const std::vector<Shape*> & shapes): MultiPoly(interName,shapes)
 {
 
 }

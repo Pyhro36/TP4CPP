@@ -1,7 +1,7 @@
 #include <sstream>
 #include "Union.h"
 
-Union::Union(const std::string & UnionName,const std::vector<std::shared_ptr<Shape>> & shapes): MultiPoly(UnionName, shapes)
+Union::Union(const std::string & UnionName,const std::vector<Shape*> & shapes): MultiPoly(UnionName, shapes)
 {
 
 }
