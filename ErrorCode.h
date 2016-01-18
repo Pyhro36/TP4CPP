@@ -1,7 +1,7 @@
 #ifndef TP_CPP3_ERRORCODE_H
 #define TP_CPP3_ERRORCODE_H
 
-const int UNKNOWN_COMMAND = 010;
+const int UNKNOWN_COMMAND = 10;
 
 const int INVALID_PARAMETERS = 100;
 const int NAME_ALREADY_USED = 101;
