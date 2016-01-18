@@ -63,13 +63,34 @@ int ShapeHandler::addRect(const std::string &name, const Point &firstCorner, con
 }
 
 int ShapeHandler::addConvexPolygon(const std::string &name, const std::vector<Point> &polygonCorners, bool saveInUndoList)
+/*
+ * Algorithme 
+ * Pour chacun des sommets du polygone, on teste si il se trouve bien
+ * a l'exterieur du polygone forme par tous les autres points du polygone
+ * etudie
+ * on utilise la methode contain() de Polygon sur le point
+ * Pour un polygone concave, cette methode peut indiquer que le point est
+ * a l'interieur alors qu'il est a l'exterieur, mais jamais l'inverse, et
+ * cette methode est eprouvee pour un polygone convexe, donc ne trouvera
+ * jamais pour un polygone convexe un sommet a l'interieur du polygone
+ * nouvellement forme 
+ * Donc si un des sommets est a l'interieur du polygone reforme sans ce 
+ * sommet, le polygone est concave et indquier comme incorrect
+ */
 {
+ /* TODO test */
     Shape * polygon = new Polygon(name, polygonCorners);
-    //TODO: check if the polygon is convex
-    /*if( poligon is not convex )
+    Polygon trunc;
+    std::vector<Point> truncCorners(polygonCorners);
+    int size = polygonCorners.size();
+    for(int i = 0, i < size, i++)
     {
-        return POLYGON_IS_NOT_CONVEX;
-    }*/
+    	trunc.erase(trunc.begin()+i);
+    	if(trunc.contain(polygonCorners[i]))
+        	return POLYGON_IS_NOT_CONVEX;
+        trunc.insert(trunc.begin()+i, polygonCorners[i]);
+    }
+    
     return addShape(polygon,saveInUndoList);
 }
 
