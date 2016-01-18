@@ -1,7 +1,6 @@
 
 #include <fstream>
 #include <iostream>
-#include <sstream>
 #include <string>
 #include <sstream>
 
@@ -155,7 +154,7 @@ int ShapeHandler::removeShape(const std::string &shapeName, bool saveInUndoList)
 
 int ShapeHandler::loadFile(const std::string & fileName)
 {
-    std::ifstream file(fileName, ios::in);
+    std::ifstream file(fileName, std::ios::in);
 
 	if(file)
 	{
@@ -179,23 +178,71 @@ int ShapeHandler::undo()
 {
     if(undoCommandStack.size()>0)
     {
+        int returnCode;
         std::string command = undoCommandStack.top();
-        if( execute(command,false)==0 )
+        if( (returnCode=execute(command,false))==0 )
         {//if every things go right remove command from undo list
             undoCommandStack.pop();
         }
+        return returnCode;
     }
+    return 0;
 }
 
 int ShapeHandler::redo()
 {
     if(redoCommandStack.size()>0)
     {
+        int returnCode;
         std::string command = redoCommandStack.top();
-        if( execute(command,true)==0 )
+        if( (returnCode=execute(command,true))==0 )
         {//if every things go right remove command from redo list
             redoCommandStack.pop();
         }
+        return returnCode;
+    }
+    return 0;
+}
+
+int ShapeHandler::clear()
+{
+    int returnCode;
+    for(std::pair<std::string,Shape*> & element:nameShapeMap)
+    {
+        returnCode = removeShape(element.second->getName(),true);
+        if(returnCode!=0)
+        {
+            return returnCode;
+        }
+    }
+    return 0;
+}
+
+int ShapeHandler::moveShape(const std::string &shapeName, const Point &vector, bool saveInUndoList)
+{
+    std::map<std::string,Shape*>::iterator element = nameShapeMap.find(shapeName);
+    if(element != nameShapeMap.end())
+    {
+        //Undo management:
+        std::stringstream undo;
+        undo << "MOVE " << shapeName << " " << -vector.getX() << " " << -vector.getY() << std::endl;
+        if(saveInUndoList)
+        {//add the undo command to list:
+            undoCommandStack.top().append(undo.str());
+            //undoCommandStack.push(undo.str());
+        }
+        else
+        {//add the undo command to redo list:
+            redoCommandStack.top().append(undo.str());
+            //redoCommandStack.push(undo.str());
+        }
+        //Move management
+        element->second->move(vector);
+        return 0;
+    }
+    else
+    {
+        return NAME_NOT_USED;
     }
 }
 
@@ -216,35 +263,68 @@ int ShapeHandler::execute(const std::string &command, bool saveInUndoList)
             std::string name;
             int x1,x2,y1,y2;
             lineStream >> name >> x1 >> y1 >> x2 >> y2;
-            addSegment(name,Point(x1,y1),Point(x2,y2));
+            int returnCode = addSegment(name,Point(x1,y1),Point(x2,y2),saveInUndoList);
+            if(returnCode!=0)
+            {
+                return  returnCode;
+            }
         }
         else if(commandId.compare("R")==0)
         {
             std::string name;
             int x1,x2,y1,y2;
             lineStream >> name >> x1 >> y1 >> x2 >> y2;
-            addRect(name,Point(x1,y1),Point(x2,y2));
+            int returnCode = addRect(name,Point(x1,y1),Point(x2,y2),saveInUndoList);
+            if(returnCode!=0)
+            {
+                return  returnCode;
+            }
         }
         else if(commandId.compare("PC")==0)
         {
             std::string name;
             std::vector<Point> points;
-            int c[2];
-            for(int i = 0; lineStream ; i=1-i) {
+            int c[2],i;
+            for(i = 0; lineStream ; i=1-i) {
                 lineStream >> c[i];
                 if(i==1)
                 {
                     points.push_back(Point(c[0],c[1]));
                 }
             }
+            if(i==0)
+                return INVALID_PARAMETERS;
+            int returnCode = addConvexPolygon(name,points,saveInUndoList);
+            if(returnCode!=0)
+                return returnCode;
         }
         else if(commandId.compare("OR")==0)
         {
-
+            std::string name;
+            std::vector<std::string> names;
+            std::string temp;
+            while(lineStream)
+            {
+                lineStream >> temp;
+                names.push_back(temp);
+            }
+            int returnCode = addUnion(name,names,saveInUndoList);
+            if(returnCode!=0)
+                return returnCode;
         }
         else if(commandId.compare("OI")==0)
         {
-
+            std::string name;
+            std::vector<std::string> names;
+            std::string temp;
+            while(!lineStream.eof())
+            {
+                lineStream >> temp;
+                names.push_back(temp);
+            }
+            int returnCode = addIntersection(name,names,saveInUndoList);
+            if(returnCode!=0)
+                return returnCode;
         }
         else if(commandId.compare("HIT")==0)
         {
@@ -252,45 +332,96 @@ int ShapeHandler::execute(const std::string &command, bool saveInUndoList)
         }
         else if(commandId.compare("DELETE")==0)
         {
-
+            std::string temp;
+            int returnCode;
+            while(!lineStream.eof())
+            {
+                lineStream >> temp;
+                if(0!=(returnCode=removeShape(temp,saveInUndoList)))
+                {
+                    return returnCode;
+                }
+            }
         }
         else if(commandId.compare("MOVE")==0)
         {
-
+            std::string name;
+            int x,y;
+            lineStream >> name >> x >> y;
+            int returnCode = moveShape(name,Point(x,y),saveInUndoList);
+            if(returnCode!=0)
+            {
+                return  returnCode;
+            }
         }
         else if(commandId.compare("LIST")==0)
         {
-
+            std::cout << list() << std::endl;
         }
         else if(commandId.compare("UNDO")==0)
         {
-
+            int returnCode;
+            if(0!=(returnCode= undo() ))
+            {
+                return returnCode;
+            }
         }
         else if(commandId.compare("REDO")==0)
         {
-
+            int returnCode;
+            if(0!=(returnCode= redo() ))
+            {
+                return returnCode;
+            }
         }
         else if(commandId.compare("LOAD")==0)
         {
-
+            std::string filePath;
+            lineStream >> filePath;
+            int returnCode;
+            if(0!=(returnCode= loadFile(filePath) ))
+            {
+                return returnCode;
+            }
         }
         else if(commandId.compare("SAVE")==0)
         {
-
+            std::string filePath;
+            lineStream >> filePath;
+            int returnCode;
+            if(0!=(returnCode= saveFile(filePath) ))
+            {
+                return returnCode;
+            }
         }
         else if(commandId.compare("CLEAR")==0)
         {
-
-        }
-        else if(commandId.compare("EXIT")==0)
-        {
-
+            int returnCode;
+            if(0!=(returnCode= clear() ))
+            {
+                return returnCode;
+            }
         }
         else
         {
-
+            return UNKNOWN_COMMAND;
         }
     }
+    return 0;
+}
+
+int ShapeHandler::userExecute(const std::string &command)
+{
+    //clear redo stack:
+    for(int i=0 ; i<redoCommandStack.size() ; i++)
+    {
+        redoCommandStack.pop();
+    }
+    //add an empty undo line:
+    undoCommandStack.push("");
+
+    //execute command:
+    return execute(command);
 }
 
 std::stringstream ShapeHandler::list()
@@ -298,7 +429,7 @@ std::stringstream ShapeHandler::list()
 	std::stringstream ret;
 
 	for(std::pair<std::string, Shape *> s:nameShapeMap)
-	{s
+	{
 		ret << s.second->describe();
 	}
 
