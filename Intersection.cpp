@@ -15,6 +15,7 @@ bool Intersection::contain(const Point & point) const
             return false; //at least one of the shape doesn't contain the point
         }
     }
+
     return true;
 }
 
@@ -35,9 +36,11 @@ std::string Intersection::describe() const
     ret << std::endl;
     //delete all the unnecessary shapes:
     ret << "DELETE";
+
     for(const std::shared_ptr<Shape> & s : shapes)
     {
         ret << " " << s->getName();
     }
+
     ret << std::endl;
 }

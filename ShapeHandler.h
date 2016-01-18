@@ -35,9 +35,14 @@ private:
     int addShape(Shape * shapeToAdd, bool saveInUndoList = true);
     int removeShape(const std::string & shapeName, bool saveInUndoList = true);
 
+    int saveFile(const std::string & fileName);
+    int loadFile(const std::string & fileName, bool saveUndoList = true);
+
     int clear();
     int undo();
     int redo();
+
+
 };
 
 

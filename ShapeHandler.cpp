@@ -1,4 +1,7 @@
 
+#include <fstream>
+#include <iostream>
+
 #include "ShapeHandler.h"
 #include "ErrorCode.h"
 
@@ -87,6 +90,26 @@ int ShapeHandler::removeShape(const std::string &shapeName, bool saveInUndoList)
     {
         return NAME_NOT_USED;
     }
+}
+
+int ShapeHandler::saveFile(const std::string & fileName)
+{
+	std::ofstream file(fileName, std::ios::out | std::ios::trunc);
+
+	if(file)
+	{
+		std::stringstream
+		string content;
+
+		file.close();
+		return 0;
+	}
+		return UNKNOWN_FILE_ERROR;
+}
+
+int ShapeHandler::loadFile(const std::string & fileName, bool saveUndoList)
+{
+
 }
 
 int ShapeHandler::undo()
