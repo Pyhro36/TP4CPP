@@ -74,20 +74,20 @@ int ShapeHandler::addConvexPolygon(const std::string &name, const std::vector<Po
  * jamais pour un polygone convexe un sommet a l'interieur du polygone
  * nouvellement forme 
  * Donc si un des sommets est a l'interieur du polygone reforme sans ce 
- * sommet, le polygone est concave et indquier comme incorrect
+ * sommet, le polygone est concave et indiquer comme incorrect
  */
 {
- /* TODO test */
     Shape * polygon = new Polygon(name, polygonCorners);
-    Polygon trunc;
     std::vector<Point> truncCorners(polygonCorners);
     int size = polygonCorners.size();
-    for(int i = 0, i < size, i++)
+    int i;
+    for(i = 0; i < size; i++)
     {
-    	trunc.erase(trunc.begin()+i);
+    	truncCorners.erase(truncCorners.begin()+i);
+    	Polygon trunc = Polygon("trunc", truncCorners);
     	if(trunc.contain(polygonCorners[i]))
         	return POLYGON_IS_NOT_CONVEX;
-        trunc.insert(trunc.begin()+i, polygonCorners[i]);
+        truncCorners.insert(truncCorners.begin()+i, polygonCorners[i]);
     }
     
     return addShape(polygon,saveInUndoList);
@@ -305,8 +305,10 @@ int ShapeHandler::execute(const std::string &command, bool saveInUndoList)
         else if(commandId.compare("PC")==0)
         {
             std::string name;
+            lineStream >> name;
             std::vector<Point> points;
-            int c[2],i;
+            int c[2];
+            int i;
             for(i = 0; lineStream ; i=1-i) {
                 lineStream >> c[i];
                 if(i==1)

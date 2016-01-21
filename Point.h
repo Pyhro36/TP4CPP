@@ -10,7 +10,9 @@ private:
     // Operations
 
 public:
-    Point(int xCoordinate, int yCoordinate);
+    Point(const int xCoordinate, const int yCoordinate);
+
+    Point(const Point& point);
 
     Point operator+(const Point &  otherPoint) const;
     Point & operator+=(const Point &  otherPoint);

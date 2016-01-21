@@ -5,6 +5,11 @@ Point::Point(int xCoordinate, int yCoordinate): x(xCoordinate), y(yCoordinate)
 
 }
 
+Point::Point(const Point& point): x(point.getX()), y(point.getY())
+{
+
+}
+
 int Point::getX() const {
     return x;
 }
