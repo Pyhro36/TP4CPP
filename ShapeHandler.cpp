@@ -64,30 +64,22 @@ int ShapeHandler::addRect(const std::string &name, const Point &firstCorner, con
 int ShapeHandler::addConvexPolygon(const std::string &name, const std::vector<Point> &polygonCorners, bool saveInUndoList)
 /*
  * Algorithme 
- * Pour chacun des sommets du polygone, on teste si il se trouve bien
- * a l'exterieur du polygone forme par tous les autres points du polygone
- * etudie
- * on utilise la methode contain() de Polygon sur le point
- * Pour un polygone concave, cette methode peut indiquer que le point est
- * a l'interieur alors qu'il est a l'exterieur, mais jamais l'inverse, et
- * cette methode est eprouvee pour un polygone convexe, donc ne trouvera
- * jamais pour un polygone convexe un sommet a l'interieur du polygone
- * nouvellement forme 
- * Donc si un des sommets est a l'interieur du polygone reforme sans ce 
- * sommet, le polygone est concave et indiquer comme incorrect
+ * Test pour chaque angle du polygone cree si son sinus est de meme signe
+ * le signe du sinus est donnee par calcul du produit vectoriel entre les
+ * vecteurs formes a partir des points formant l'angle en question :
+ * sg((xB - xA)(yC - yA)- (xC - xA)(yB - yA)) = sg(sinus(BAC))
+ * si un angle a un sinus de signe oppose,renvoie un code d'erreur de polyone
+ * non convexe
+ * sinon, ajoute le polygone au dictionnaire du ShapeHandler et renvoie 0
  */
 {
+	//TODO implements commentaries
     Shape * polygon = new Polygon(name, polygonCorners);
-    std::vector<Point> truncCorners(polygonCorners);
-    int size = polygonCorners.size();
-    int i;
-    for(i = 0; i < size; i++)
+    //bool positive = ;
+    std::vector<Point>::iterator corner;
+    //for(corner = (std::vector<Point>::iterator) (++polygonCorners.begin()); corner != polygonCorners.end(); corner++)
     {
-    	truncCorners.erase(truncCorners.begin()+i);
-    	Polygon trunc = Polygon("trunc", truncCorners);
-    	if(trunc.contain(polygonCorners[i]))
-        	return POLYGON_IS_NOT_CONVEX;
-        truncCorners.insert(truncCorners.begin()+i, polygonCorners[i]);
+
     }
     
     return addShape(polygon,saveInUndoList);
