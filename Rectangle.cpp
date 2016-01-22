@@ -9,6 +9,14 @@ Rectangle::Rectangle(const std::string & RectName, const Point & firstCorner, co
     points.push_back(secondCorner);
     points.push_back(Point(secondCorner.getX(),firstCorner.getY()));
 
+    resetMinMax();
+}
+
+void Rectangle::resetMinMax()
+{
+    Point &firstCorner = points.at(0);
+    Point &secondCorner = points.at(2);
+
     //set min and max coordinate
     if(firstCorner.getX() < secondCorner.getX())
     {
@@ -49,4 +57,10 @@ std::string Rectangle::describe() const
 Shape* Rectangle::clone() const
 {
     return new Rectangle(*this);
+}
+
+void Rectangle::move(const Point &vector)
+{
+    Polygon::move(vector);
+    resetMinMax();
 }

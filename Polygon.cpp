@@ -22,26 +22,38 @@ bool Polygon::contain(const Point & point) const
             else
             {
                 return  false; // the polygon is convex so the point can't be contained on the polygon
+                               // (may add false result in case of aligned points)
             }
         }
         else if( isBetween(point.getX(),firstSegmentPoint.getX(),secondSegmentPoint.getX()) )
         {
-            double deltaY = firstSegmentPoint.getY()-secondSegmentPoint.getY();
-            double deltaX = firstSegmentPoint.getX()-secondSegmentPoint.getX();
-
-            double yOnCurrantSegment = (point.getX()-firstSegmentPoint.getX())*deltaY/deltaX + firstSegmentPoint.getY();
-
-            if(yOnCurrantSegment > point.getY())
-            {
+            if( point.getY()>=firstSegmentPoint.getY() && point.getY()>=secondSegmentPoint.getY() )
+            {//if the both extremity of the segment are over the point
                 overBounded = true;
             }
-            else if(yOnCurrantSegment < point.getY())
-            {
+            else if(point.getY()<=firstSegmentPoint.getY() && point.getY()<=secondSegmentPoint.getY())
+            {//if the both extremity of the segment are under the point
                 underBounded = true;
             }
-            else // if yOnCurrantSegment == point.getY()
-            {
-                return true; //the point is on the segment so is contained on the polygon
+            else
+            {//if the point is between the two some work is needed
+                double deltaY = firstSegmentPoint.getY()-secondSegmentPoint.getY();
+                double deltaX = firstSegmentPoint.getX()-secondSegmentPoint.getX();
+
+                double yOnCurrantSegment = (point.getX()-firstSegmentPoint.getX())*deltaY/deltaX + firstSegmentPoint.getY();
+
+                if(yOnCurrantSegment > point.getY())
+                {
+                    overBounded = true;
+                }
+                else if(yOnCurrantSegment < point.getY())
+                {
+                    underBounded = true;
+                }
+                else // if yOnCurrantSegment == point.getY()
+                {
+                    return true; //the point is on the segment so is contained on the polygon
+                }
             }
             // check if we have found the solution
             if(underBounded && overBounded)

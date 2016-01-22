@@ -40,6 +40,8 @@ private:
 
     int moveShape(const std::string &shapeName, const Point& vector, bool saveInUndoList =true);
 
+    int hitShape(const std::string &shapeName, const Point&point);
+
     int saveFile(const std::string & fileName);
     int loadFile(const std::string & fileName);
 

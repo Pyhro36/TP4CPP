@@ -219,6 +219,27 @@ int ShapeHandler::clear()
     return 0;
 }
 
+int ShapeHandler::hitShape(const std::string &shapeName, const Point &point)
+{
+    std::map<std::string,Shape*>::iterator element = nameShapeMap.find(shapeName);
+    if(element != nameShapeMap.end())
+    {
+        if(element->second->contain(point))
+        {
+            std::cout << "YES" << std::endl;
+        }
+        else
+        {
+            std::cout << "NO" << std::endl;
+        }
+        return 0;
+    }
+    else
+    {
+        return NAME_NOT_USED;
+    }
+}
+
 int ShapeHandler::moveShape(const std::string &shapeName, const Point &vector, bool saveInUndoList)
 {
     std::map<std::string,Shape*>::iterator element = nameShapeMap.find(shapeName);
@@ -285,16 +306,14 @@ int ShapeHandler::execute(const std::string &command, bool saveInUndoList)
         {
             std::string name;
             std::vector<Point> points;
-            int c[2],i;
-            for(i = 0; lineStream ; i=1-i) {
-                lineStream >> c[i];
-                if(i==1)
-                {
-                    points.push_back(Point(c[0],c[1]));
-                }
+            int c[2];
+            lineStream >> name;
+            while(!lineStream.eof())
+            {
+                lineStream >> c[0];
+                lineStream >> c[1];
+                points.push_back(Point(c[0],c[1]));
             }
-            if(i==0)
-                return INVALID_PARAMETERS;
             int returnCode = addConvexPolygon(name,points,saveInUndoList);
             if(returnCode!=0)
                 return returnCode;
@@ -304,7 +323,8 @@ int ShapeHandler::execute(const std::string &command, bool saveInUndoList)
             std::string name;
             std::vector<std::string> names;
             std::string temp;
-            while(lineStream)
+            lineStream >> name;
+            while(!lineStream.eof())
             {
                 lineStream >> temp;
                 names.push_back(temp);
@@ -318,6 +338,7 @@ int ShapeHandler::execute(const std::string &command, bool saveInUndoList)
             std::string name;
             std::vector<std::string> names;
             std::string temp;
+            lineStream >> name;
             while(!lineStream.eof())
             {
                 lineStream >> temp;
@@ -329,16 +350,31 @@ int ShapeHandler::execute(const std::string &command, bool saveInUndoList)
         }
         else if(commandId.compare("HIT")==0)
         {
-
+            std::string name;
+            int x,y;
+            lineStream >> name >> x >> y;
+            int returnCode = hitShape(name,Point(x,y));
+            if(returnCode!=0)
+            {
+                return  returnCode;
+            }
         }
         else if(commandId.compare("DELETE")==0)
         {
             std::string temp;
+            std::vector<std::string> toDelete;
             int returnCode;
             while(!lineStream.eof())
             {
                 lineStream >> temp;
-                if(0!=(returnCode=removeShape(temp,saveInUndoList)))
+                if(nameShapeMap.find(temp) != nameShapeMap.end())
+                {
+                    return NAME_NOT_USED;
+                }
+            }
+            for(std::string name:toDelete)
+            {
+                if(0!=(returnCode=removeShape(name,saveInUndoList)))
                 {
                     return returnCode;
                 }

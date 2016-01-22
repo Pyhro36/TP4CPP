@@ -17,7 +17,7 @@ public:
     Polygon(const std::string &polyName, const std::vector<Point> &polyPoints = std::vector<Point>());
 
     virtual bool contain(const Point &point) const;
-    void move(const Point &vector);
+    virtual void move(const Point &vector);
     virtual std::string describe() const;
     virtual Shape* clone() const;
 

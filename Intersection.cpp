@@ -21,12 +21,12 @@ bool Intersection::contain(const Point & point) const
 std::string Intersection::describe() const
 {
     std::stringstream ret;
-    //to create all the shape needed for the Union:
+    //to create all the shape needed for the Intersection:
     for(const Shape * s : shapes)
     {
         ret << s->describe();
     }
-    //Union creation:
+    //Intersection creation:
     ret << "OI " << name;
     for(const Shape * s : shapes)
     {
