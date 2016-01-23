@@ -2,6 +2,7 @@
 #include <string>
 
 #include "ShapeHandler.h"
+#include "ErrorCode.h"
 
 using namespace std;
 
@@ -24,25 +25,25 @@ int main() {
     	{
     		case 0 :
     			break;		
-    		case 10 :		
+    		case UNKNOWN_COMMAND :
     			cout << "#unkown command" << endl;
     			break;			
-    		case 100 :		
+    		case INVALID_PARAMETERS :
     			cout << "#invalid parameters" << endl;
     			break;  			
-    		case 101 :   		
+    		case NAME_ALREADY_USED :
     			cout << "#name already used" << endl;
     			break;			
-    		case 102 :   		
+    		case NAME_NOT_USED :
     			cout << "#name not used" << endl;
     			break;		
-    		case 110 :		
+    		case POLYGON_IS_NOT_CONVEX :
     			cout << "#polygon defined is not convex" << endl;
     			break;			
-    		case 120 :  		
+    		case UNKNOWN_FILE_ERROR :
     			cout << "#unkown file error" << endl;
     			break;			
-    		case 121 :   		
+    		case FILE_DOES_NOT_EXIST :
     			cout << "#file does not exist" << endl;
     			break;			
     		default :		
