@@ -63,13 +63,48 @@ int ShapeHandler::addRect(const std::string &name, const Point &firstCorner, con
 }
 
 int ShapeHandler::addConvexPolygon(const std::string &name, const std::vector<Point> &polygonCorners, bool saveInUndoList)
+/*
+ * Algorithme :
+ * si le polygone contient au moins trois points
+ * mesure le signe du sinus de l'angle BAC forme par les trois premiers points
+ * A,B,C du polygone par la formule du produit vectoriel :
+ * sg((xB - xA)(yC - yA) - (xC - xA)(yB - yA)) = sg(sinus(BAC))
+ * reitere l'operation en gardant le meme sommet mais en avancant d'extremites
+ * en extremites autour du polygone (pour le polygone ABCDEF, il le calcule
+ * pour CAD, DAE, DEF) et teste si le signe du sinus est toujoàurs le meme
+ * si un angle a un sinus de signe oppose, renvoie un code d'erreur de polyone
+ * non convexe (le polygone a un renfoncment, ou boucle sur lui meme)
+ * sinon, ajoute le polygone au dictionnaire du ShapeHandler et renvoie 0
+ * si le polygone possede moins de 3 sommets, renvoie un code d'erreur de
+ * polygone de moins de trois sommets
+ */
 {
+
     Shape * polygon = new Polygon(name, polygonCorners);
-    //TODO: check if the polygon is convex
-    /*if( poligon is not convex )
+    bool positive = (((polygonCorners[1].getX() - polygonCorners[0].getX()) *
+    		(polygonCorners[2].getY() - polygonCorners[0].getY())) -
+    		((polygonCorners[2].getX() - polygonCorners[0].getX()) *
+    	    (polygonCorners[1].getY() - polygonCorners[0].getY())) > 0 );
+    int size;
+    int i;
+
+    if ((size = polygonCorners.size()) < 3)
     {
-        return POLYGON_IS_NOT_CONVEX;
-    }*/
+    	return POLYGON_LESS_THAN_3;
+    }
+
+    for(i = 2; i < size - 2; i++)
+    // si le polygone est un triangle (toujours convexe)
+    // on entre jamais dans la boucle for
+    {
+    	if( positive != (((polygonCorners[i].getX() - polygonCorners[0].getX())
+    			* (polygonCorners[i+1].getY() - polygonCorners[0].getY()))
+    			- ((polygonCorners[i+1].getX() - polygonCorners[0].getX())
+    			* (polygonCorners[i].getY() - polygonCorners[0].getY())) > 0 ))
+
+			return POLYGON_IS_NOT_CONVEX;
+    } // fin for chaque sinus de l'angle d'origine le premier sommet
+
     return addShape(polygon,saveInUndoList);
 }
 
