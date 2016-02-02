@@ -40,6 +40,9 @@ int main() {
     		case POLYGON_IS_NOT_CONVEX :
     			cout << "#polygon defined is not convex" << endl;
     			break;			
+    		case POLYGON_LESS_THAN_3 :
+    			cout << "#polygon defined contains less than 3 corners" << endl;
+    			break;
     		case UNKNOWN_FILE_ERROR :
     			cout << "#unkown file error" << endl;
     			break;			
