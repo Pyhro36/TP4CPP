@@ -552,14 +552,14 @@ int ShapeHandler::execute(const std::string &command, bool saveInUndoList)
 int ShapeHandler::userExecute(const std::string &command)
 {
     //if it's a creation command clear redo stack and create a new undo command:
-    if( command.substr(0,4).compare("UNDO")!=0 &&
-            command.substr(0,4).compare("LIST")!=0 && command.substr(0,3).compare("HIT")!=0 &&
-            command.substr(0,4).compare("SAVE")!=0)
+    if( command.substr(0,4).compare("UNDO") != 0 &&
+            command.substr(0,4).compare("LIST") != 0 && command.substr(0,3).compare("HIT")!=0 &&
+            command.substr(0,4).compare("SAVE") != 0)
     {
-        if(command.substr(0,4).compare("REDO")!=0)
+        if(command.substr(0,4).compare("REDO") != 0)
         {
             //clear redo stack
-            for(unsigned i=0 ; i<redoCommandStack.size() ; i++)
+            for(unsigned i = 0 ; i < redoCommandStack.size() ; i++)
             {
                 redoCommandStack.pop();
             }
@@ -570,14 +570,15 @@ int ShapeHandler::userExecute(const std::string &command)
 
     //execute command:
     int returnCode = execute(command);
-    if(command.at(0)!='L' && command.at(0)!='H' ) //L and H not to show 'OK' when HIT or LIST command
+    if((command.at(0) != 'L' || command.at(1) != 'I') && command.at(0) != 'H' )
+    //L and H not to show 'OK' when HIT or LIST command
     {
     	if(returnCode == 0)
     		std::cout << "OK" << std::endl;
     	else
     		std::cout << "ERR" << std::endl;
     }
-    else if(returnCode != 0 && undoCommandStack.top().length()==0)
+    else if(returnCode != 0 && undoCommandStack.top().length() == 0)
     { //if any error occurred the undo stack can be unusable, if so we clean it
         undoCommandStack.pop();
     }
