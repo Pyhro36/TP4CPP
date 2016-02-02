@@ -12,4 +12,6 @@ const int POLYGON_IS_NOT_CONVEX = 110;
 const int UNKNOWN_FILE_ERROR = 120;
 const int FILE_DOES_NOT_EXIST = 121;
 
+const int NOTHING_TO_DO = 130;
+
 #endif //TP_CPP3_ERRORCODE_H
