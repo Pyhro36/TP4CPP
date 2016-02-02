@@ -78,21 +78,19 @@ int ShapeHandler::addConvexPolygon(const std::string &name, const std::vector<Po
  * polygone de moins de trois sommets
  */
 {
+	int size;
+	if ((size = polygonCorners.size()) < 3)
+	{
+		return POLYGON_LESS_THAN_3;
+	}
 
     Shape * polygon = new Polygon(name, polygonCorners);
     bool positive = (((polygonCorners[1].getX() - polygonCorners[0].getX()) *
     		(polygonCorners[2].getY() - polygonCorners[0].getY())) -
     		((polygonCorners[2].getX() - polygonCorners[0].getX()) *
     	    (polygonCorners[1].getY() - polygonCorners[0].getY())) > 0 );
-    int size;
     int i;
-
-    if ((size = polygonCorners.size()) < 3)
-    {
-    	return POLYGON_LESS_THAN_3;
-    }
-
-    for(i = 2; i < size - 2; i++)
+    for(i = 2; i < size - 1; i++)
     // si le polygone est un triangle (toujours convexe)
     // on entre jamais dans la boucle for
     {
@@ -100,8 +98,7 @@ int ShapeHandler::addConvexPolygon(const std::string &name, const std::vector<Po
     			* (polygonCorners[i+1].getY() - polygonCorners[0].getY()))
     			- ((polygonCorners[i+1].getX() - polygonCorners[0].getX())
     			* (polygonCorners[i].getY() - polygonCorners[0].getY())) > 0 ))
-
-			return POLYGON_IS_NOT_CONVEX;
+    		return POLYGON_IS_NOT_CONVEX;
     } // fin for chaque sinus de l'angle d'origine le premier sommet
 
     return addShape(polygon,saveInUndoList);
@@ -341,6 +338,7 @@ int ShapeHandler::execute(const std::string &command, bool saveInUndoList)
             int returnCode = addSegment(name,Point(x1,y1),Point(x2,y2),saveInUndoList);
             if(returnCode!=0)
             {
+            	std::cout << "ERR" << std::endl;
                 return  returnCode;
             }
         }
@@ -352,6 +350,7 @@ int ShapeHandler::execute(const std::string &command, bool saveInUndoList)
             int returnCode = addRect(name,Point(x1,y1),Point(x2,y2),saveInUndoList);
             if(returnCode!=0)
             {
+            	std::cout << "ERR" << std::endl;
                 return  returnCode;
             }
         }
@@ -547,9 +546,12 @@ int ShapeHandler::userExecute(const std::string &command)
 
     //execute command:
     int returnCode = execute(command);
-    if(returnCode == 0 && command.at(0)!='L' && command.at(0)!='H' ) //L and H not to show 'OK' when HIT or LIST command
+    if(command.at(0)!='L' && command.at(0)!='H' ) //L and H not to show 'OK' when HIT or LIST command
     {
-        std::cout << "OK" << std::endl;
+    	if(returnCode == 0)
+    		std::cout << "OK" << std::endl;
+    	else
+    		std::cout << "ERR" << std::endl;
     }
     return returnCode;
 }
