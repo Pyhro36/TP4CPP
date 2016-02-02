@@ -13,4 +13,6 @@ const int POLYGON_LESS_THAN_3 = 111;
 const int UNKNOWN_FILE_ERROR = 120;
 const int FILE_DOES_NOT_EXIST = 121;
 
+const int NOTHING_TO_DO = 130;
+
 #endif //TP_CPP3_ERRORCODE_H

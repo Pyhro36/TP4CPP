@@ -28,6 +28,7 @@ int ShapeHandler::addShape(Shape *shapeToAdd, bool saveInUndoList)
         //prepare undo command:
         std::string undo = "DELETE ";
         undo.append(shapeToAdd->getName());
+        undo.append("\n");
         //put undo command on stack:
         if(saveInUndoList)
         {
@@ -229,15 +230,22 @@ int ShapeHandler::undo()
             //if the command has no undo command then generate a basic one
             if(command.find("|")==std::string::npos)
             {
-                std::string redoCommand = "\n|\n";
+                std::string redoCommand = "|\n";
                 redoCommand.append(command);
                 redoCommandStack.top().append(redoCommand);
             }
             undoCommandStack.pop();
         }
+        else
+        {//if something goes wrong no need to have a redo command
+            redoCommandStack.pop();
+        }
         return returnCode;
     }
-    return 0;
+    else
+    {
+        return NOTHING_TO_DO;
+    }
 }
 
 int ShapeHandler::redo()
@@ -252,7 +260,10 @@ int ShapeHandler::redo()
         }
         return returnCode;
     }
-    return 0;
+    else
+    {
+        return NOTHING_TO_DO;
+    }
 }
 
 int ShapeHandler::clear()
@@ -323,14 +334,18 @@ int ShapeHandler::execute(const std::string &command, bool saveInUndoList)
     std::stringstream commandStream;
     commandStream.str(command);
     std::string line;
-    std::stringstream lineStream;
     std::string commandId;
     //read command line by line
     while(std::getline(commandStream,line))
     {
+        std::stringstream lineStream;
         lineStream.str(line);
         lineStream >> commandId;
-        if(commandId.compare("S")==0)
+        if(line.length()==0)
+        {
+            //do nothing
+        }
+        else if(commandId.compare("S")==0)
         {
             std::string name;
             int x1,x2,y1,y2;
@@ -495,18 +510,24 @@ int ShapeHandler::execute(const std::string &command, bool saveInUndoList)
         else if(commandId.compare("|")==0)
         {//set the undo/redo command to the specified command
             std::string undoCommand("");
+            bool linebreak=true;
             //get the undo command from input
             getline(lineStream,undoCommand);
+            if(undoCommand.length()==0)
+                linebreak=false;
             std::string undoCommandLine;
             while(std::getline(commandStream,undoCommandLine))
             {
-                undoCommand.append("\n");
+                if(linebreak)
+                    undoCommand.append("\n");
+                else
+                    linebreak=true;
                 undoCommand.append(undoCommandLine);
             }
             //get the redo command
             unsigned long endOfCommand = command.find_first_of('|');
-            undoCommand.append("|\n");
-            undoCommand.append(command.substr(0,endOfCommand-1));
+            undoCommand.append("\n|\n");
+            undoCommand.append(command.substr(0,endOfCommand));
             //save the command to the appropriate stack:
             if(saveInUndoList)
             {
@@ -516,14 +537,14 @@ int ShapeHandler::execute(const std::string &command, bool saveInUndoList)
             else
             {
                 redoCommandStack.pop();
-                redoCommandStack.push(undoCommandLine);
+                redoCommandStack.push(undoCommand);
             }
-
         }
         else
         {
             return UNKNOWN_COMMAND;
         }
+        line = "";
     }
     return 0;
 }
@@ -531,14 +552,17 @@ int ShapeHandler::execute(const std::string &command, bool saveInUndoList)
 int ShapeHandler::userExecute(const std::string &command)
 {
     //if it's a creation command clear redo stack and create a new undo command:
-    if(command.substr(0,4).compare("REDO")!=0 && command.substr(0,4).compare("UNDO")!=0 &&
+    if( command.substr(0,4).compare("UNDO")!=0 &&
             command.substr(0,4).compare("LIST")!=0 && command.substr(0,3).compare("HIT")!=0 &&
             command.substr(0,4).compare("SAVE")!=0)
     {
-        //clear redo stack
-        for(unsigned i=0 ; i<redoCommandStack.size() ; i++)
+        if(command.substr(0,4).compare("REDO")!=0)
         {
-            redoCommandStack.pop();
+            //clear redo stack
+            for(unsigned i=0 ; i<redoCommandStack.size() ; i++)
+            {
+                redoCommandStack.pop();
+            }
         }
         //add an empty undo line
         undoCommandStack.push("");
@@ -552,6 +576,10 @@ int ShapeHandler::userExecute(const std::string &command)
     		std::cout << "OK" << std::endl;
     	else
     		std::cout << "ERR" << std::endl;
+    }
+    else if(returnCode != 0 && undoCommandStack.top().length()==0)
+    { //if any error occurred the undo stack can be unusable, if so we clean it
+        undoCommandStack.pop();
     }
     return returnCode;
 }
