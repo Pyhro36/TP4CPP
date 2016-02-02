@@ -161,7 +161,17 @@ int ShapeHandler::loadFile(const std::string & fileName)
 	{
         std::string ret = "";
         std::string line;
-		getline(file,line);
+        bool lineBreak = false;
+        while(getline(file,line))
+        {
+            if(lineBreak)
+                ret.append("\n");
+            else
+                lineBreak=true;
+            ret.append(line);
+        }
+        execute(ret, true);
+		/*getline(file,line);
 		while(!line.compare("|"))
 		{
 			ret.append(line);
@@ -170,7 +180,7 @@ int ShapeHandler::loadFile(const std::string & fileName)
 		getline(file, line);
 		undoCommandStack.push(line);
 		execute(ret, true);
-		undoCommandStack.pop();
+		undoCommandStack.pop();*/
 	}
 	return FILE_DOES_NOT_EXIST;
 }
@@ -181,8 +191,16 @@ int ShapeHandler::undo()
     {
         int returnCode;
         std::string command = undoCommandStack.top();
+        redoCommandStack.push("");
         if( (returnCode=execute(command,false))==0 )
         {//if every things go right remove command from undo list
+            //if the command has no undo command then generate a basic one
+            if(command.find("|")==std::string::npos)
+            {
+                std::string redoCommand = "\n|\n";
+                redoCommand.append(command);
+                redoCommandStack.top().append(redoCommand);
+            }
             undoCommandStack.pop();
         }
         return returnCode;
@@ -367,10 +385,11 @@ int ShapeHandler::execute(const std::string &command, bool saveInUndoList)
             while(!lineStream.eof())
             {
                 lineStream >> temp;
-                if(nameShapeMap.find(temp) != nameShapeMap.end())
+                if(nameShapeMap.find(temp) == nameShapeMap.end())
                 {
                     return NAME_NOT_USED;
                 }
+                toDelete.push_back(temp);
             }
             for(std::string name:toDelete)
             {
@@ -439,6 +458,34 @@ int ShapeHandler::execute(const std::string &command, bool saveInUndoList)
                 return returnCode;
             }
         }
+        else if(commandId.compare("|")==0)
+        {//set the undo/redo command to the specified command
+            std::string undoCommand("");
+            //get the undo command from input
+            getline(lineStream,undoCommand);
+            std::string undoCommandLine;
+            while(std::getline(commandStream,undoCommandLine))
+            {
+                undoCommand.append("\n");
+                undoCommand.append(undoCommandLine);
+            }
+            //get the redo command
+            unsigned long endOfCommand = command.find_first_of('|');
+            undoCommand.append("|\n");
+            undoCommand.append(command.substr(0,endOfCommand-1));
+            //save the command to the appropriate stack:
+            if(saveInUndoList)
+            {
+                undoCommandStack.pop();
+                undoCommandStack.push(undoCommand);
+            }
+            else
+            {
+                redoCommandStack.pop();
+                redoCommandStack.push(undoCommandLine);
+            }
+
+        }
         else
         {
             return UNKNOWN_COMMAND;
@@ -449,13 +496,19 @@ int ShapeHandler::execute(const std::string &command, bool saveInUndoList)
 
 int ShapeHandler::userExecute(const std::string &command)
 {
-    //clear redo stack:
-    for(unsigned i=0 ; i<redoCommandStack.size() ; i++)
+    //if it's a creation command clear redo stack and create a new undo command:
+    if(command.substr(0,4).compare("REDO")!=0 && command.substr(0,4).compare("UNDO")!=0 &&
+            command.substr(0,4).compare("LIST")!=0 && command.substr(0,3).compare("HIT")!=0 &&
+            command.substr(0,4).compare("SAVE")!=0)
     {
-        redoCommandStack.pop();
+        //clear redo stack
+        for(unsigned i=0 ; i<redoCommandStack.size() ; i++)
+        {
+            redoCommandStack.pop();
+        }
+        //add an empty undo line
+        undoCommandStack.push("");
     }
-    //add an empty undo line:
-    undoCommandStack.push("");
 
     //execute command:
     int returnCode = execute(command);
