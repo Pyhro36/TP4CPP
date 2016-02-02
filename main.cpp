@@ -51,6 +51,7 @@ int main() {
     			break;
 			case NOTHING_TO_DO:
 				cout << "#nothing to be done" << endl;
+				break;
     		default :		
     			cout << "#unknown error" << endl;
     			break;

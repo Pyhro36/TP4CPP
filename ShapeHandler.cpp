@@ -195,25 +195,18 @@ int ShapeHandler::loadFile(const std::string & fileName)
         std::string ret = "";
         std::string line;
         bool lineBreak = false;
+
         while(getline(file,line))
         {
             if(lineBreak)
                 ret.append("\n");
             else
-                lineBreak=true;
+                lineBreak = true;
             ret.append(line);
         }
+
         execute(ret, true);
-		/*getline(file,line);
-		while(!line.compare("|"))
-		{
-			ret.append(line);
-			getline(file,line);
-		}
-		getline(file, line);
-		undoCommandStack.push(line);
-		execute(ret, true);
-		undoCommandStack.pop();*/
+        return 0;
 	}
 	return FILE_DOES_NOT_EXIST;
 }
@@ -225,10 +218,10 @@ int ShapeHandler::undo()
         int returnCode;
         std::string command = undoCommandStack.top();
         redoCommandStack.push("");
-        if( (returnCode=execute(command,false))==0 )
+        if( (returnCode=execute(command,false)) == 0 )
         {//if every things go right remove command from undo list
             //if the command has no undo command then generate a basic one
-            if(command.find("|")==std::string::npos)
+            if(command.find("|") == std::string::npos)
             {
                 std::string redoCommand = "|\n";
                 redoCommand.append(command);
@@ -426,7 +419,7 @@ int ShapeHandler::execute(const std::string &command, bool saveInUndoList)
                 return  returnCode;
             }
         }
-        else if(commandId.compare("DELETE")==0)
+        else if(commandId.compare("DELETE") == 0)
         {
             std::string temp;
             std::vector<std::string> toDelete;
@@ -442,7 +435,7 @@ int ShapeHandler::execute(const std::string &command, bool saveInUndoList)
             }
             for(std::string name:toDelete)
             {
-                if(0!=(returnCode=removeShape(name,saveInUndoList)))
+                if(0 != (returnCode = removeShape(name,saveInUndoList)))
                 {
                     return returnCode;
                 }
@@ -600,11 +593,11 @@ std::string ShapeHandler::list()
 std::string ShapeHandler::deleteList()
 {
 	std::stringstream ret;
-	ret << std::endl << "|" << std::endl << "DELETE ";
+	ret << std::endl << "|" << std::endl << "DELETE";
 
 	for(std::pair<std::string, Shape *> s:nameShapeMap)
 	{
-		ret << s.first << " ";
+		ret << " " << s.first;
 	}
 
 	return ret.str();
