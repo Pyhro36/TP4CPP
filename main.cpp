@@ -48,7 +48,9 @@ int main() {
     			break;			
     		case FILE_DOES_NOT_EXIST :
     			cout << "#file does not exist" << endl;
-    			break;			
+    			break;
+			case NOTHING_TO_DO:
+				cout << "#nothing to be done" << endl;
     		default :		
     			cout << "#unknown error" << endl;
     			break;
