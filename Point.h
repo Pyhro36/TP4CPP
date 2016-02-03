@@ -2,7 +2,8 @@
 #define POINT_H
 
 /// class point -
-class Point {
+class Point
+{
     // Attributes
 private:
     int x;

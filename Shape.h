@@ -5,7 +5,8 @@
 #include "Point.h"
 
 /// class Shape -
-class Shape {
+class Shape
+{
     // Attributes
 protected:
     std::string name;

@@ -5,7 +5,8 @@
 #include "MultiPoly.h"
 
 /// class Union - 
-class Union : public MultiPoly {
+class Union : public MultiPoly
+{
     // Operations
 public:
     Union(const std::string &UnionName, const std::vector<Shape*> &shapes);

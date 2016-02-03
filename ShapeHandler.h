@@ -14,12 +14,14 @@
 #include "Segment.h"
 #include "Rectangle.h"
 
-class ShapeHandler {
+class ShapeHandler
+{
+	// Attributes
 private:
     std::map<std::string,Shape*> nameShapeMap; //map of pointer to Shape ordered by shape name
     std::stack<std::string> undoCommandStack; //LIFO list of command, one command per undo (one command can have more than one line)
     std::stack<std::string> redoCommandStack; //LIFO list of command, one command per redo (one command can have more than one line)
-
+    // Operations
 public:
     ShapeHandler();
     virtual ~ShapeHandler();

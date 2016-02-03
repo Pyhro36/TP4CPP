@@ -8,7 +8,8 @@
 #include "Shape.h"
 
 /// class Intersection - 
-class Intersection : public MultiPoly {
+class Intersection : public MultiPoly
+{
     // Operations
 public:
     Intersection(const std::string & interName,const std::vector<Shape*> & shapes);
