@@ -6,7 +6,8 @@
 
 using namespace std;
 
-int main() {
+int main()
+{
     
     cout << "Shape handler 1.0 :" << endl;
     
