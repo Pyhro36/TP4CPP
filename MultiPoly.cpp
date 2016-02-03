@@ -9,6 +9,7 @@ MultiPoly::MultiPoly(const std::string & PolysName,const std::vector<Shape*> & s
     {
         s->appendToName(toAdd);
     }
+
 }
 
 MultiPoly::MultiPoly(const MultiPoly &multypolyToClone): Shape(multypolyToClone.getName())
@@ -28,6 +29,7 @@ MultiPoly::~MultiPoly()
     {
         delete s;
     }
+
 }
 
 void MultiPoly::move(const Point & vector)
