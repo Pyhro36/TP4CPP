@@ -29,7 +29,6 @@ MultiPoly::~MultiPoly()
     {
         delete s;
     }
-
 }
 
 void MultiPoly::move(const Point & vector)

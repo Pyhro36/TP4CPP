@@ -99,7 +99,10 @@ int ShapeHandler::addConvexPolygon(const std::string &name, const std::vector<Po
     			* (polygonCorners[i+1].getY() - polygonCorners[0].getY()))
     			- ((polygonCorners[i+1].getX() - polygonCorners[0].getX())
     			* (polygonCorners[i].getY() - polygonCorners[0].getY())) > 0 ))
+    	{
+    		delete polygon;
     		return POLYGON_IS_NOT_CONVEX;
+    	}
     } // end for each angle
 
     return addShape(polygon,saveInUndoList);
