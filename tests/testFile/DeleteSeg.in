@@ -1,0 +1,11 @@
+S s0 0 0 10 10
+S s1 14 15 -7 2
+S s2 8 -20 -78 -5
+S s3 -7  5 -1 4
+LIST
+DELETE s0 s1 s2
+LIST
+DELETE s1
+LIST
+DELETE s3
+LIST
