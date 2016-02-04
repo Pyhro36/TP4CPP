@@ -12,14 +12,15 @@ do
 	OUTPUT=testFile/output/out$i
 
 	echo ""
-	echo "======================================="
+	echo "=============================================================================="
 	echo "Éxecution de $INPUT"
-	echo "======================================="
+	echo "=============================================================================="
 	echo ""
 
 	/usr/bin/time -v $EXE < $INPUT > $OUTPUT
 
-	echo ""
+	echo "---"
+	echo "Fichier de sortie écrit dans: $OUTPUT"
 	echo "Diférences trouvées avec la sortie attendu:"
 	echo ""
 
