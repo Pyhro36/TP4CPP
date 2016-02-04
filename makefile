@@ -23,9 +23,6 @@ SOS = backup
 
 EXEC_OPT =
 
-RUN : $(EXE)
-	./$(EXE) $(EXEC_OPT)
-
 $(EXE) : $(OBJ)
 	$(ECHO) "Edition des liens"
 	$(EDL) $(OUTPUT) $(EXE) $(EDLFLAGS) $(LIBPATH) $(OBJ) $(LIBS)

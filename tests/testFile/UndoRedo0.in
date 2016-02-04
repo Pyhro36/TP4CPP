@@ -1,0 +1,23 @@
+PC convex0 5 6 3 6 3 -4 5 -4
+PC convex1 1 0 1 1 0 1 0 0
+PC convex2 17 4 8 0 2 0 0 7 2 10 11 11
+PC convex3 -8 -6 -2 -10 1 -4 -5 -1
+S seg0 0 4 10 0
+S seg1 0 0 10 4
+R rec0 0 4 10 0
+PC pc 0 4 10 0 0 0
+OI oi seg0 seg1 rec0 pc
+S seg2 0 4 10 0
+R rec -10 -5 1 5
+OR or seg2 rec
+LIST
+DELETE rec rec0
+LIST
+SAVE tests/testFile/testFILE.txt
+CLEAR
+LIST
+LOAD tests/testFile/testFILE.txt
+LIST
+CLEAR
+LIST
+EXIT

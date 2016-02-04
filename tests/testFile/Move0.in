@@ -1,0 +1,18 @@
+PC convex0 5 6 3 6 3 -4 5 -4
+S seg0 0 4 10 0
+S seg1 0 0 10 4
+R rec0 0 4 10 0
+PC pc 0 4 10 0 0 0
+OI oi seg0 seg1 rec0 pc
+S seg2 0 4 10 0
+R rec -10 -5 1 5
+OR or seg2 rec
+LIST
+MOVE convex0 15 18
+MOVE seg0 -5 -4
+MOVE rec0 -7 8
+MOVE pc 10 0
+MOVE oi 25 -48
+MOVE or 0 2
+LIST
+EXIT

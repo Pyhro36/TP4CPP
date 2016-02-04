@@ -67,12 +67,12 @@ int ShapeHandler::addConvexPolygon(const std::string &name, const std::vector<Po
  * Algorithm :
  * if the polygon contains less than 3 corners, returns an error code of
  * less the 3 corners polygon
- * else calculates the sinus sign of the angle BAC formed by the 3 first
- * corners A,B,C of the polygon by the formula of the vector product :
- * sg((xB - xA)(yC - yA) - (xC - xA)(yB - yA)) = sg(sinus(BAC))
+ * else for each corners A calculates the sinus sign of the angle BAC formed
+ * by the 3 corners A,B,C of the polygon by the formula of the vector
+ * product : sg((xB - xA)(yC - yA) - (xC - xA)(yB - yA)) = sg(sinus(BAC))
  * repeats the operation with the same origin (A) but by turning around by
  * using corners in order as new extremities for the angle (for the polygon
- * ABCDEF, it calculates the sinus sign for the angles CAD, DAE, DEF)
+ * ABCDEF, it calculates the sinus sign for the angles CAD, DAE, DAF)
  * for each angle, tests if the sign is still the same
  * if one sign is different, returns an error code of non convex polygon
  * (if the polygon has a concavity, or loops on himself)
@@ -86,24 +86,30 @@ int ShapeHandler::addConvexPolygon(const std::string &name, const std::vector<Po
 	}
 
     Shape * polygon = new Polygon(name, polygonCorners);
-    bool positive = (((polygonCorners[1].getX() - polygonCorners[0].getX()) *
-    		(polygonCorners[2].getY() - polygonCorners[0].getY())) -
-    		((polygonCorners[2].getX() - polygonCorners[0].getX()) *
-    	    (polygonCorners[1].getY() - polygonCorners[0].getY())) > 0 );
-    int i;
-    for(i = 2; i < size - 1; i++)
-    // if the polygon is a triangle (always convex)
-    // it never enters in the for loop
+    bool positive;
+    int j;
+    for(j = 0; j < size; j++)
     {
-    	if( positive != (((polygonCorners[i].getX() - polygonCorners[0].getX())
-    			* (polygonCorners[i+1].getY() - polygonCorners[0].getY()))
-    			- ((polygonCorners[i+1].getX() - polygonCorners[0].getX())
-    			* (polygonCorners[i].getY() - polygonCorners[0].getY())) > 0 ))
+    	positive = (((polygonCorners[(j+1)%size].getX() - polygonCorners[j].getX()) *
+    	(polygonCorners[(j+2)%size].getY() - polygonCorners[j].getY())) -
+    	((polygonCorners[(j+2)%size].getX() - polygonCorners[j].getX()) *
+    	(polygonCorners[(j+1)%size].getY() - polygonCorners[j].getY())) > 0 );
+
+    	int i;
+    	for(i = 2; i < size - 1; i++)
+    	// if the polygon is a triangle (always convex)
+    	// it never enters in the for loop
     	{
-    		delete polygon;
-    		return POLYGON_IS_NOT_CONVEX;
-    	}
-    } // end for each angle
+    		if( positive != (((polygonCorners[(j+i)%size].getX() - polygonCorners[j].getX())
+    			* (polygonCorners[(j+i+1)%size].getY() - polygonCorners[j].getY()))
+    			- ((polygonCorners[(j+i+1)%size].getX() - polygonCorners[j].getX())
+    			* (polygonCorners[(j+i)%size].getY() - polygonCorners[j].getY())) > 0 ))
+    		{
+    			delete polygon;
+    			return POLYGON_IS_NOT_CONVEX;
+    		}
+    	} // end for each angle
+    }
 
     return addShape(polygon,saveInUndoList);
 }
