@@ -21,7 +21,7 @@ bool Segment::contain(const Point & point) const
             return  false; //the point is not on the segment
         }
     }
-    else if( isBetween(point.getX(),points.at(0).getX(),points.at(1).getX()) )
+    else if( isBetween(point.getX(),points.at(0).getX(),points.at(1).getX()) && isBetween(point.getY(),points.at(0).getY(),points.at(1).getY()) )
     {
         double deltaY = points.at(0).getY()-points.at(1).getY();
         double deltaX = points.at(0).getX()-points.at(1).getX();

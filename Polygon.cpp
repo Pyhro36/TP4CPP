@@ -9,11 +9,14 @@ Polygon::Polygon(const std::string & polyName,const std::vector<Point> & polyPoi
 bool Polygon::contain(const Point & point) const
 {
     bool overBounded=false, underBounded=false;
-    Point firstSegmentPoint = points.at(points.size()-1);
-    Point secondSegmentPoint = points.at(0);
+    Point firstSegmentPoint(0,0);
+    Point secondSegmentPoint = points.at(points.size()-1);
 
     for(unsigned i=0 ; i<points.size() ; i++)
     {
+        firstSegmentPoint = secondSegmentPoint;
+        secondSegmentPoint = points.at(i);
+
         if( point.getX()==firstSegmentPoint.getX() && firstSegmentPoint.getX()==secondSegmentPoint.getX())
         {
             if( isBetween(point.getY(),firstSegmentPoint.getY(),secondSegmentPoint.getY()))
@@ -28,11 +31,15 @@ bool Polygon::contain(const Point & point) const
         }
         else if( isBetween(point.getX(),firstSegmentPoint.getX(),secondSegmentPoint.getX()) )
         {
-            if( point.getY()>=firstSegmentPoint.getY() && point.getY()>=secondSegmentPoint.getY() )
+            if( point.getY()==firstSegmentPoint.getY() && firstSegmentPoint.getY()==secondSegmentPoint.getY())
+            {//if the line is as y=const then if the point have the same y it's on the polygon
+                return true;
+            }
+            else if( point.getY()<=firstSegmentPoint.getY() && point.getY()<=secondSegmentPoint.getY() )
             {//if the both extremity of the segment are over the point
                 overBounded = true;
             }
-            else if(point.getY()<=firstSegmentPoint.getY() && point.getY()<=secondSegmentPoint.getY())
+            else if(point.getY()>=firstSegmentPoint.getY() && point.getY()>=secondSegmentPoint.getY())
             {//if the both extremity of the segment are under the point
                 underBounded = true;
             }
@@ -62,8 +69,6 @@ bool Polygon::contain(const Point & point) const
                 return true; //we found a segment over the point and an other under, the point must be contained on the polygon (as it's a convex one)
             }
         }
-        firstSegmentPoint = secondSegmentPoint;
-        secondSegmentPoint = points.at(i);
     }
     return false;
 }
