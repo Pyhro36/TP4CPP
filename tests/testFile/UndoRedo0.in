@@ -1,3 +1,5 @@
+UNDO
+REDO
 PC convex0 5 6 3 6 3 -4 5 -4
 PC convex1 1 0 1 1 0 1 0 0
 PC convex2 17 4 8 0 2 0 0 7 2 10 11 11
@@ -6,18 +8,50 @@ S seg0 0 4 10 0
 S seg1 0 0 10 4
 R rec0 0 4 10 0
 PC pc 0 4 10 0 0 0
-OI oi seg0 seg1 rec0 pc
 S seg2 0 4 10 0
 R rec -10 -5 1 5
 OR or seg2 rec
+UNDO
+UNDO
+UNDO
+UNDO
+UNDO
 LIST
-DELETE rec rec0
+UNDO
+UNDO
+UNDO
+UNDO
+UNDO
+UNDO
+UNDO
 LIST
-SAVE tests/testFile/testFILE.txt
+REDO
+REDO
+REDO
+REDO
+REDO
+LIST
+REDO
+REDO
+REDO
+REDO
+LIST
+DELETE rec0 seg0
+UNDO
+LIST
+REDO
+LIST
 CLEAR
+UNDO
 LIST
-LOAD tests/testFile/testFILE.txt
+REDO
 LIST
-CLEAR
+LOAD testFile/otherFILE.txt
+LIST
+UNDO
+REDO
+UNDO
+REDO
+UNDO
 LIST
 EXIT

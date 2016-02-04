@@ -573,7 +573,7 @@ int ShapeHandler::userExecute(const std::string &command)
     //execute command:
     int returnCode = execute(command);
     if((command.at(0) != 'L' || command.at(1) != 'I') && command.at(0) != 'H' )
-    //L and H not to show 'OK' when HIT or LIST command
+    //not to show 'OK' when HIT or LIST command
     {
     	if(returnCode == 0)
     		std::cout << "OK" << std::endl;

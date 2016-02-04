@@ -1,3 +1,5 @@
+#include <string>
+
 #include "MultiPoly.h"
 
 MultiPoly::MultiPoly(const std::string & PolysName,const std::vector<Shape*> & shapesList): Shape(PolysName), shapes(shapesList)
@@ -7,6 +9,7 @@ MultiPoly::MultiPoly(const std::string & PolysName,const std::vector<Shape*> & s
     toAdd.append(name);
     for(Shape* s:shapes)
     {
+    	if(s->getName().find(name) == std::string::npos)
         s->appendToName(toAdd);
     }
 
@@ -14,7 +17,6 @@ MultiPoly::MultiPoly(const std::string & PolysName,const std::vector<Shape*> & s
 
 MultiPoly::MultiPoly(const MultiPoly &multypolyToClone): Shape(multypolyToClone.getName())
 {
-    //TODO check if it work...
     for(Shape* s:multypolyToClone.shapes)
     {
         //call the copy constructor of every Shape (so it is recursive)

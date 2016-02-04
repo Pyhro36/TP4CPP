@@ -3,6 +3,18 @@
 ################################################################################
 
 # Add inputs and outputs from these tool invocations to the build variables 
+O_SRCS += \
+../Intersection.o \
+../MultiPoly.o \
+../Point.o \
+../Polygon.o \
+../Rectangle.o \
+../Segment.o \
+../Shape.o \
+../ShapeHandler.o \
+../Union.o \
+../main.o 
+
 CPP_SRCS += \
 ../Intersection.cpp \
 ../MultiPoly.cpp \
