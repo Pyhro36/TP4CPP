@@ -1,0 +1,17 @@
+S seg0 0 4 10 0
+R rec -10 -5 1 5
+OR or seg0 rec
+HIT or -9 0
+HIT or -2 4
+HIT or 10 0
+HIT or 1 4
+HIT or 0 4
+HIT or 5 2
+HIT or 3 3
+HIT or 5 3
+HIT or 7 1
+HIT or 9 0
+HIT or 3 4
+HIT or 5 3
+HIT or 7 2
+HIT or 9 1

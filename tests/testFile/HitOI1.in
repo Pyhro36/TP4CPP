@@ -1,0 +1,21 @@
+S seg0 0 4 10 0
+S seg1 0 0 10 4
+R rec 0 4 10 0
+PC pc 0 4 10 0 0 0
+OI oi seg0 seg1 rec pc
+HIT oi 5 2
+HIT oi 2 4
+HIT oi 4 3
+HIT oi 6 2
+HIT oi 8 1
+HIT oi 10 0
+HIT oi 1 4
+HIT oi 3 3
+HIT oi 5 2
+HIT oi 7 1
+HIT oi 9 0
+HIT oi 1 5
+HIT oi 3 4
+HIT oi 5 3
+HIT oi 7 2
+HIT oi 9 1
