@@ -1,7 +1,7 @@
 #makefile de test_bechfulladder
 #la variable EXE correspond au nom du test a effectuer 
 
-EXE = ../B3129
+EXE = B3129
 COMP = g++
 RM = rm
 EDL = g++

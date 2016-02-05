@@ -1,4 +1,4 @@
-#makefile de test_bechfulladder
+#makefile de B3129
 #la variable EXE correspond au nom du test a effectuer 
 
 EXE = ../B3129

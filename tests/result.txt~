@@ -1,0 +1,53 @@
+Pour évaluer les performances de notre programme, on utilise le script de test avec trois fichiers d'input : 
+
+BigPolyReg0 teste la création de 10 000 polygones réguliers (aux arrondis) d'un nombre aléatoire de côtés compris entre 65 et 70 cotés : 
+
+==============================================================================
+Éxecution de testFile/BigPolyReg0.in
+==============================================================================
+
+	Command being timed: "../B3129"
+	User time (seconds): 2.32
+	System time (seconds): 0.02
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:02.34
+	...
+---
+
+Le résultat indique donc que pour utilisation maximale (99%) du CPU, le programme met 2,34 secondes pour effectuer la totalité de ces opérations, ce que fait moins de 3/10000 de seconde par polygone.
+
+BigPolyReg1 teste en plus de la création des 10 000 polygones, la création d'une réunion des 10 000 polygones et de 100 000 tests de HIT (10 par polygones) sur la réunion, nécessitant donc à chaque HIT de retester l'appartenance du point avec jusqu'à tous les polygones.
+
+==============================================================================
+Éxecution de testFile/BigPolyReg0.1withUnion.in
+==============================================================================
+
+	Command being timed: "../B3129"
+	User time (seconds): 2.42
+	System time (seconds): 0.02
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:02.44
+	...
+---
+
+Le résultat indique donc que que l'ensemble de ces opération prend 12 minutes et 48 secondes 96, soit XXXX pour les HIT, donc XXXX par HIT
+
+
+
+BigPolyReg1 teste en plus de la création des 10 000 polygones, la création d'une réunion des 10 000 polygones et de 100 000 tests de HIT (10 par polygones) sur la réunion, nécessitant donc à chaque HIT de retester l'appartenance du point avec jusqu'à tous les polygones.
+
+==============================================================================
+Éxecution de testFile/BigPolyReg1.in
+==============================================================================
+
+	Command being timed: "../B3129"
+	User time (seconds): 766.02
+	System time (seconds): 2.67
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 12:48.96
+	...
+---
+
+Le résultat indique donc que que l'ensemble de ces opération prend 12 minutes et 48 secondes 96, soit XXXX pour les HIT, donc XXXX par HIT
+
+
