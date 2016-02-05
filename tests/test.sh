@@ -1,4 +1,4 @@
-EXE=../shape_Handler
+EXE=../B3129
 
 inputList=$(ls testFile/*.in)
 outputList=$(ls testFile/*.out)
