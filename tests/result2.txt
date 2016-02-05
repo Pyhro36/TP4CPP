@@ -1,0 +1,563 @@
+./test.sh 
+
+==============================================================================
+Éxecution de testFile/BadPoly1.in
+==============================================================================
+
+	Command being timed: "../shape_Handler"
+	User time (seconds): 0.00
+	System time (seconds): 0.00
+	Percent of CPU this job got: 0%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:00.00
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 3300
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 132
+	Voluntary context switches: 1
+	Involuntary context switches: 1
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 8
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+---
+Fichier de sortie écrit dans: testFile/output/out1
+Diférences trouvées avec la sortie attendu:
+
+Les fichiers testFile/output/out1 et testFile/BadPoly1.out sont identiques
+
+==============================================================================
+Éxecution de testFile/BigPolyReg0.1withUnion.in
+==============================================================================
+
+	Command being timed: "../shape_Handler"
+	User time (seconds): 2.42
+	System time (seconds): 0.02
+	Percent of CPU this job got: 100%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:02.44
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 17192
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 3807
+	Voluntary context switches: 1
+	Involuntary context switches: 12
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 64
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+---
+Fichier de sortie écrit dans: testFile/output/out2
+Diférences trouvées avec la sortie attendu:
+
+Les fichiers testFile/output/out2 et testFile/BigPolyReg0.1withUnion.out sont identiques
+
+==============================================================================
+Éxecution de testFile/BigPolyReg0.in
+==============================================================================
+
+	Command being timed: "../shape_Handler"
+	User time (seconds): 2.32
+	System time (seconds): 0.06
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:02.39
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 10940
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 2024
+	Voluntary context switches: 1
+	Involuntary context switches: 15
+	Swaps: 0
+	File system inputs: 5368
+	File system outputs: 64
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+---
+Fichier de sortie écrit dans: testFile/output/out3
+Diférences trouvées avec la sortie attendu:
+
+Les fichiers testFile/output/out3 et testFile/BigPolyReg0.out sont identiques
+
+==============================================================================
+Éxecution de testFile/BigPolyReg2SaveFile.in
+==============================================================================
+
+	Command being timed: "../shape_Handler"
+	User time (seconds): 2.63
+	System time (seconds): 0.03
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:02.67
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 68588
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 9038
+	Voluntary context switches: 3
+	Involuntary context switches: 16
+	Swaps: 0
+	File system inputs: 8
+	File system outputs: 34528
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+---
+Fichier de sortie écrit dans: testFile/output/out4
+Diférences trouvées avec la sortie attendu:
+
+Les fichiers testFile/output/out4 et testFile/BigPolyReg2SaveFile.out sont identiques
+
+==============================================================================
+Éxecution de testFile/BigPolyReg3LoadFile.in
+==============================================================================
+
+	Command being timed: "../shape_Handler"
+	User time (seconds): 4.42
+	System time (seconds): 0.04
+	Percent of CPU this job got: 100%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:04.46
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 111980
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 10506
+	Voluntary context switches: 1
+	Involuntary context switches: 23
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 8
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+---
+Fichier de sortie écrit dans: testFile/output/out5
+Diférences trouvées avec la sortie attendu:
+
+Les fichiers testFile/output/out5 et testFile/BigPolyReg3LoadFile.out sont identiques
+
+==============================================================================
+Éxecution de testFile/BigPolyReg4SaveCleaAndLoadFile.in
+==============================================================================
+
+	Command being timed: "../shape_Handler"
+	User time (seconds): 4.42
+	System time (seconds): 0.04
+	Percent of CPU this job got: 100%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:04.47
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 111876
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 10464
+	Voluntary context switches: 1
+	Involuntary context switches: 17
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 8
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+---
+Fichier de sortie écrit dans: testFile/output/out6
+Diférences trouvées avec la sortie attendu:
+
+Les fichiers testFile/output/out6 et testFile/BigPolyReg4SaveCleaAndLoadFile.out sont identiques
+
+==============================================================================
+Éxecution de testFile/BigPolyReg5Total_GenerateSaveClearLoadAndHits.in
+==============================================================================
+
+	Command being timed: "../shape_Handler"
+	User time (seconds): 158.41
+	System time (seconds): 0.89
+	Percent of CPU this job got: 100%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 2:39.22
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 131080
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 14062
+	Voluntary context switches: 1
+	Involuntary context switches: 563
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 34728
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+---
+Fichier de sortie écrit dans: testFile/output/out7
+Diférences trouvées avec la sortie attendu:
+
+Les fichiers testFile/output/out7 et testFile/BigPolyReg5Total_GenerateSaveClearLoadAndHits.out sont identiques
+
+==============================================================================
+Éxecution de testFile/DeleteSeg1.in
+==============================================================================
+
+	Command being timed: "../shape_Handler"
+	User time (seconds): 0.00
+	System time (seconds): 0.00
+	Percent of CPU this job got: 0%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:00.00
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 3140
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 129
+	Voluntary context switches: 1
+	Involuntary context switches: 1
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 8
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+---
+Fichier de sortie écrit dans: testFile/output/out8
+Diférences trouvées avec la sortie attendu:
+
+Les fichiers testFile/output/out8 et testFile/DeleteSeg1.out sont identiques
+
+==============================================================================
+Éxecution de testFile/HitOI1.in
+==============================================================================
+
+	Command being timed: "../shape_Handler"
+	User time (seconds): 0.00
+	System time (seconds): 0.00
+	Percent of CPU this job got: 0%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:00.00
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 3240
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 128
+	Voluntary context switches: 1
+	Involuntary context switches: 1
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 8
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+---
+Fichier de sortie écrit dans: testFile/output/out9
+Diférences trouvées avec la sortie attendu:
+
+Les fichiers testFile/output/out9 et testFile/HitOI1.out sont identiques
+
+==============================================================================
+Éxecution de testFile/HitOR1.in
+==============================================================================
+
+	Command being timed: "../shape_Handler"
+	User time (seconds): 0.00
+	System time (seconds): 0.00
+	Percent of CPU this job got: 0%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:00.00
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 3256
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 128
+	Voluntary context switches: 1
+	Involuntary context switches: 2
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 8
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+---
+Fichier de sortie écrit dans: testFile/output/out10
+Diférences trouvées avec la sortie attendu:
+
+Les fichiers testFile/output/out10 et testFile/HitOR1.out sont identiques
+
+==============================================================================
+Éxecution de testFile/HitPoly1.in
+==============================================================================
+
+	Command being timed: "../shape_Handler"
+	User time (seconds): 0.00
+	System time (seconds): 0.00
+	Percent of CPU this job got: 0%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:00.00
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 3252
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 128
+	Voluntary context switches: 1
+	Involuntary context switches: 1
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 8
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+---
+Fichier de sortie écrit dans: testFile/output/out11
+Diférences trouvées avec la sortie attendu:
+
+Les fichiers testFile/output/out11 et testFile/HitPoly1.out sont identiques
+
+==============================================================================
+Éxecution de testFile/HitPolyRect0.in
+==============================================================================
+
+	Command being timed: "../shape_Handler"
+	User time (seconds): 0.00
+	System time (seconds): 0.00
+	Percent of CPU this job got: 0%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:00.00
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 3300
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 130
+	Voluntary context switches: 1
+	Involuntary context switches: 1
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 8
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+---
+Fichier de sortie écrit dans: testFile/output/out12
+Diférences trouvées avec la sortie attendu:
+
+Les fichiers testFile/output/out12 et testFile/HitPolyRect0.out sont identiques
+
+==============================================================================
+Éxecution de testFile/HitRect0.in
+==============================================================================
+
+	Command being timed: "../shape_Handler"
+	User time (seconds): 0.00
+	System time (seconds): 0.00
+	Percent of CPU this job got: 0%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:00.00
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 3264
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 128
+	Voluntary context switches: 1
+	Involuntary context switches: 1
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 8
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+---
+Fichier de sortie écrit dans: testFile/output/out13
+Diférences trouvées avec la sortie attendu:
+
+Les fichiers testFile/output/out13 et testFile/HitRect0.out sont identiques
+
+==============================================================================
+Éxecution de testFile/HitSeg1.in
+==============================================================================
+
+	Command being timed: "../shape_Handler"
+	User time (seconds): 0.00
+	System time (seconds): 0.00
+	Percent of CPU this job got: 0%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:00.00
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 3264
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 128
+	Voluntary context switches: 1
+	Involuntary context switches: 1
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 8
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+---
+Fichier de sortie écrit dans: testFile/output/out14
+Diférences trouvées avec la sortie attendu:
+
+Les fichiers testFile/output/out14 et testFile/HitSeg1.out sont identiques
+
+==============================================================================
+Éxecution de testFile/Move0.in
+==============================================================================
+
+	Command being timed: "../shape_Handler"
+	User time (seconds): 0.00
+	System time (seconds): 0.00
+	Percent of CPU this job got: 0%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:00.00
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 3368
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 134
+	Voluntary context switches: 1
+	Involuntary context switches: 1
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 8
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+---
+Fichier de sortie écrit dans: testFile/output/out15
+Diférences trouvées avec la sortie attendu:
+
+Les fichiers testFile/output/out15 et testFile/Move0.out sont identiques
+
+==============================================================================
+Éxecution de testFile/SaveLoadClear1.in
+==============================================================================
+
+	Command being timed: "../shape_Handler"
+	User time (seconds): 0.00
+	System time (seconds): 0.00
+	Percent of CPU this job got: 0%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:00.00
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 3360
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 135
+	Voluntary context switches: 1
+	Involuntary context switches: 1
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 16
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+---
+Fichier de sortie écrit dans: testFile/output/out16
+Diférences trouvées avec la sortie attendu:
+
+Les fichiers testFile/output/out16 et testFile/SaveLoadClear1.out sont identiques
+
+==============================================================================
+Éxecution de testFile/UndoRedo0.in
+==============================================================================
+
+	Command being timed: "../shape_Handler"
+	User time (seconds): 0.00
+	System time (seconds): 0.00
+	Percent of CPU this job got: 0%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:00.00
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 3336
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 136
+	Voluntary context switches: 1
+	Involuntary context switches: 1
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 8
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+---
+Fichier de sortie écrit dans: testFile/output/out17
+Diférences trouvées avec la sortie attendu:
+
+Les fichiers testFile/output/out17 et testFile/UndoRedo0.out sont identiques
+
