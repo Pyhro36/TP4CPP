@@ -1,0 +1,18 @@
+S seg 0 5 10 0
+HIT seg 0 5
+HIT seg 2 4
+HIT seg 4 3
+HIT seg 6 2
+HIT seg 8 1
+HIT seg 10 0
+HIT seg 1 4
+HIT seg 3 3
+HIT seg 5 2
+HIT seg 7 1
+HIT seg 9 0
+HIT seg 1 5
+HIT seg 3 4
+HIT seg 5 3
+HIT seg 7 2
+HIT seg 9 1
+EXIT
